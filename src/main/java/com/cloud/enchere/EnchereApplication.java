@@ -1,13 +1,13 @@
-package com.cloud.projetcloudenchere;
+package com.cloud.enchere;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class ProjetCloudEnchereApplication {
+public class EnchereApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(ProjetCloudEnchereApplication.class, args);
+        SpringApplication.run(EnchereApplication.class, args);
     }
 
 }
