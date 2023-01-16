@@ -6,6 +6,7 @@ import org.springframework.context.annotation.ComponentScan;
 
 @SpringBootApplication
 @ComponentScan(basePackages = "mix.projetcloudenchere.controllerjsp")
+@ComponentScan(basePackages = "mix.projetcloudenchere.controllerWeb")
 public class ProjetCloudEnchereApplication {
 
     public static void main(String[] args) {
