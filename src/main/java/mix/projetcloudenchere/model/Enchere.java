@@ -19,7 +19,6 @@ public class Enchere {
     @JoinColumn(name = "idproduit", nullable = false)
     private Produit idproduit;
 
-    @Lob
     @Column(name = "description")
     private String description;
 
