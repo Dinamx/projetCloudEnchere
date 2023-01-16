@@ -154,3 +154,7 @@ Create table PrelevementEnchere(
 -- View
 -- Benefice de l'utilisateur
 select u.idutilisateur,((select sum(montant) from rechargementcompte where idUtilisateur=u.idutilisateur)-(select sum(montant_offre) from surenchere where idutilisateur=u.idutilisateur)) as solde_compte from utilisateur u where  u.idutilisateur=1;
+
+-- Statistics
+-- les tops 3 des categories qui rapport le plus par mois
+select c.categorie,(select max(montant_offre) from surenchere group by extract(month from DateHeureMise)) as moyenne,to_char(DateHeureEnchere,'Month') as mois from produit p join CategorieProduit c using(idCategorieProduit) join Enchere e using(idProduit) join surenchere s using(idEnchere) group by c.idCategorieProduit,mois order by moyenne desc limit 3;
