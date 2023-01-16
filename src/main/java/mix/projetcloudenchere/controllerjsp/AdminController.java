@@ -47,8 +47,6 @@ public class AdminController {
             Tokenadmin t = new TokenService().createToken(admin);
 
 
-
-
             Tokenadmin saved = tokenadminRepository.save(t);
             System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
 
