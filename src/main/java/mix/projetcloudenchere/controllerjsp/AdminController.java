@@ -2,6 +2,7 @@ package mix.projetcloudenchere.controllerjsp;
 
 
 import mix.projetcloudenchere.model.Admin;
+import mix.projetcloudenchere.model.Categorieproduit;
 import mix.projetcloudenchere.model.Tokenadmin;
 import mix.projetcloudenchere.repository.AdminRepository;
 import mix.projetcloudenchere.repository.CategorieproduitRepository;
@@ -16,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 @Controller
 public class AdminController {
@@ -47,8 +49,11 @@ public class AdminController {
             Tokenadmin t = new TokenService().createToken(admin);
 
 
+
             Tokenadmin saved = tokenadminRepository.save(t);
             System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
+            List<Categorieproduit> categories = categorieproduitRepository.findAll();
+            model.addAttribute("categories" , categories );
 
             return "acceuilAdmin";
         }
@@ -68,9 +73,9 @@ public class AdminController {
             return "/";
         }
     }
-    @PostMapping("AjoutProduit")
-    public String addProduit(HttpServletRequest request){
-        String nomProduit = request.getParameter("nomProduit");
+    @PostMapping("/categories")
+    public String addCategorie(HttpServletRequest request,Model model){
+        String nomProduit = request.getParameter("nomCategorie");
         return "acceuilAdmin";
     }
 

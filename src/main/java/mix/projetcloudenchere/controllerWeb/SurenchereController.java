@@ -1,7 +1,4 @@
 package mix.projetcloudenchere.controllerWeb;
-
-import mix.projetcloudenchere.model.Surenchere;
-import mix.projetcloudenchere.repository.SurenchereRepository;
 import mix.projetcloudenchere.views.VueEnchereProduitUtilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
