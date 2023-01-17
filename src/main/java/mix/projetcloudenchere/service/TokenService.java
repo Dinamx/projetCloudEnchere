@@ -49,4 +49,13 @@ public class TokenService {
 
         return new Tokenadmin(admin,token,creation,expiration);
     }
+
+    public Tokenadmin updateToken(Tokenadmin tokenadmin) throws Exception {
+        LocalDate creation = LocalDate.now();
+        System.out.println("creation = " + creation);
+
+        LocalDate expiration = LocalDate.now().plusDays(1);
+        System.out.println("creation = " + expiration);
+        return new Tokenadmin(tokenadmin.getIdadmin(),tokenadmin.getToken(),creation,expiration);
+    }
 }

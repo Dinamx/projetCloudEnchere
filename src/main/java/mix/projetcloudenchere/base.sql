@@ -37,7 +37,7 @@ insert into RechargementCompte(idUtilisateur,montant) values (1,300) , (1,400) ;
 
 create table CategorieProduit(
 idCategorieProduit serial primary key,
-categorie varchar(20)
+categorie varchar(100)
 );
 
 create table Produit(
