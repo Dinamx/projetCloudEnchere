@@ -1,6 +1,7 @@
 package mix.projetcloudenchere.model;
 
 import javax.persistence.*;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
@@ -19,7 +20,7 @@ public class Rechargementcompte {
     private Double montant;
 
     @Column(name = "dateheurechargement")
-    private Instant dateheurechargement;
+    private Timestamp dateheurechargement;
 
     @Column(name = "validation")
     private Integer validation;
@@ -32,11 +33,11 @@ public class Rechargementcompte {
         this.validation = validation;
     }
 
-    public Instant getDateheurechargement() {
+    public Timestamp getDateheurechargement() {
         return dateheurechargement;
     }
 
-    public void setDateheurechargement(Instant dateheurechargement) {
+    public void setDateheurechargement(Timestamp dateheurechargement) {
         this.dateheurechargement = dateheurechargement;
     }
 
