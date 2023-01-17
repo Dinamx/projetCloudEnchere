@@ -1,9 +1,7 @@
 package mix.projetcloudenchere.controllerWeb;
 
 import mix.projetcloudenchere.model.Enchere;
-import mix.projetcloudenchere.model.Surenchere;
 import mix.projetcloudenchere.repository.EnchereRepository;
-import mix.projetcloudenchere.repository.SurenchereRepository;
 import mix.projetcloudenchere.repository.VueEnchereProduitUtilisateurRepository;
 import mix.projetcloudenchere.views.VueEnchereProduitUtilisateur;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,8 +15,6 @@ import java.util.List;
 @RestController
 @CrossOrigin
 public class EnchereController {
-    @Autowired
-    SurenchereRepository surenchereRepository;
 
     @Autowired
     EnchereRepository enchereRepository;
@@ -90,7 +86,7 @@ public class EnchereController {
             System.out.println("user");
 
             List<Enchere> enchere = new ArrayList<>();
-            enchereRepository.findAllByIdutilisateur(Integer.valueOf(iduser)).forEach(enchere::add);
+            enchereRepository.findAllByIdutilisateur(iduser).forEach(enchere::add);
             if (enchere.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
