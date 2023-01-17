@@ -1,5 +1,7 @@
 package mix.projetcloudenchere.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.Instant;
 
@@ -11,11 +13,14 @@ public class Enchere {
     @Column(name = "idenchere", nullable = false)
     private Integer id;
 
+
     @ManyToOne(fetch = FetchType.LAZY)
+    @JsonIgnore
     @JoinColumn(name = "idutilisateur")
     private Utilisateur idutilisateur;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @ManyToOne(fetch = FetchType.LAZY, optional = true)
+    @JsonIgnore
     @JoinColumn(name = "idproduit", nullable = false)
     private Produit idproduit;
 

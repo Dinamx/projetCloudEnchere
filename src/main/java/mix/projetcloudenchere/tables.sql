@@ -109,6 +109,7 @@ Create table Produit_image(
 
 
 --  10
+
 create table Enchere(
                         idEnchere serial primary key,
                         idUtilisateur int references Utilisateur(idUtilisateur),
