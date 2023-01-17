@@ -21,11 +21,14 @@ public class EnchereController {
     @GetMapping("/encheres")
     public ResponseEntity<List<Enchere>> listeToutesEnchere(){
         try {
+            System.out.println("user");
+
             List<Enchere> enchere = new ArrayList<>();
             enchereRepository.findAll().forEach(enchere::add);
             if (enchere.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
+            System.out.println("retour");
             return new ResponseEntity<>(enchere, HttpStatus.OK);
         }
         catch (Exception e){
