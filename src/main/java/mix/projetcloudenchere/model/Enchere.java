@@ -15,12 +15,12 @@ public class Enchere {
 
 
     @ManyToOne(fetch = FetchType.LAZY)
-    @JsonIgnore
+//    @JsonIgnore
     @JoinColumn(name = "idutilisateur")
     private Utilisateur idutilisateur;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = true)
-    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY)
+//    @JsonIgnore
     @JoinColumn(name = "idproduit", nullable = false)
     private Produit idproduit;
 
