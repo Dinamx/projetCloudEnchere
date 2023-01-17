@@ -58,13 +58,7 @@ create table tokenUser(
 );
 
 -- 5
-create table compte(
-                                   idcompte serial primary key,
-                                   iduser int references Utilisateur(idUtilisateur),
-                                   montant double precision,
-                                   DateHeureRechargement TIMESTAMP default CURRENT_TIMESTAMP ,
-                                   estValider int default 0
-);
+-- Nofafana ny 5
 
 -- 6
 Create table rechargementcompte(
@@ -155,6 +149,10 @@ Create table PrelevementEnchere(
 -- View
 -- Benefice de l'utilisateur
 select u.idutilisateur,((select sum(montant) from rechargementcompte where idUtilisateur=u.idutilisateur)-(select sum(montant_offre) from surenchere where idutilisateur=u.idutilisateur)) as solde_compte from utilisateur u where  u.idutilisateur=1;
+
+
+
+
 
 -- Statistics
 -- les tops 3 des categories qui rapport le plus par mois
