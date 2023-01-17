@@ -13,10 +13,17 @@ public class Categorieproduit {
     @Column(name = "categorie", length = 20)
     private String categorie;
 
+    public Categorieproduit(String nomCategorie) {
+        this.categorie = nomCategorie;
+    }
+
+    public Categorieproduit() {
+
+    }
+
     public String getCategorie() {
         return categorie;
     }
-
     public void setCategorie(String categorie) {
         this.categorie = categorie;
     }
