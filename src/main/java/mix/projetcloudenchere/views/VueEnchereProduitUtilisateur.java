@@ -47,6 +47,20 @@ public class VueEnchereProduitUtilisateur {
     @Column(name = "status")
     private Integer status;
 
+    @Column(name = "idcategorieproduit")
+    Integer idcategorieproduit;
+
+    @Column(name = "categorie")
+    String categorie;
+
+    public Integer getIdcategorieproduit() {
+        return idcategorieproduit;
+    }
+
+    public String getCategorie() {
+        return categorie;
+    }
+
     public Integer getStatus() {
         return status;
     }
