@@ -2,6 +2,7 @@ package mix.projetcloudenchere.controllerjsp;
 
 
 import mix.projetcloudenchere.model.Admin;
+import mix.projetcloudenchere.model.Categorieproduit;
 import mix.projetcloudenchere.model.Tokenadmin;
 import mix.projetcloudenchere.repository.AdminRepository;
 import mix.projetcloudenchere.repository.CategorieproduitRepository;
@@ -47,9 +48,12 @@ public class AdminController {
             Tokenadmin t = new TokenService().createToken(admin);
 
 
+
             Tokenadmin saved = tokenadminRepository.save(t);
             System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
 
+//            Liste des Categories Existances
+            model.addAttribute("categories",categorieproduitRepository.findAll());
             return "acceuilAdmin";
         }
         else{
@@ -68,10 +72,11 @@ public class AdminController {
             return "/";
         }
     }
-    @PostMapping("AjoutProduit")
-    public String addProduit(HttpServletRequest request){
-        String nomProduit = request.getParameter("nomProduit");
+    @PostMapping("categories")
+    public String addCategorie(HttpServletRequest request, Model model){
+        String nomCategorie = request.getParameter("categorie");
+        categorieproduitRepository.save(new Categorieproduit(nomCategorie));
+        model.addAttribute("categories",categorieproduitRepository.findAll());
         return "acceuilAdmin";
     }
-
 }
