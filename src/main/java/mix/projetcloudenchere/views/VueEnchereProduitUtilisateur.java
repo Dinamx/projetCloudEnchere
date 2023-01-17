@@ -6,6 +6,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
@@ -41,7 +42,7 @@ public class VueEnchereProduitUtilisateur {
     private Integer dureeenchere;
 
     @Column(name = "dateheureenchere")
-    private Instant dateheureenchere;
+    private Timestamp dateheureenchere;
 
     @Column(name = "status")
     private Integer status;
@@ -50,7 +51,7 @@ public class VueEnchereProduitUtilisateur {
         return status;
     }
 
-    public Instant getDateheureenchere() {
+    public Timestamp getDateheureenchere() {
         return dateheureenchere;
     }
 
