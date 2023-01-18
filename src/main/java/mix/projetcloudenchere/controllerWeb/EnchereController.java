@@ -3,7 +3,9 @@ package mix.projetcloudenchere.controllerWeb;
 import mix.projetcloudenchere.model.Enchere;
 import mix.projetcloudenchere.repository.EnchereRepository;
 import mix.projetcloudenchere.repository.VueEnchereProduitUtilisateurRepository;
+import mix.projetcloudenchere.views.DetailEnchere;
 import mix.projetcloudenchere.views.VueEnchereProduitUtilisateur;
+import mix.projetcloudenchere.viewsRepository.DetailEnchereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,16 +23,18 @@ public class EnchereController {
     @Autowired
     VueEnchereProduitUtilisateurRepository vueEnchereProduitUtilisateurRepository;
 
+    @Autowired
+    DetailEnchereRepository detailEnchereRepository;
 
 
 
     @GetMapping("/encheres")
-    public ResponseEntity<List<VueEnchereProduitUtilisateur>> listeToutesEnchereDetails(){
+    public ResponseEntity<List<DetailEnchere>> listeToutesEnchereDetails(){
         try {
             System.out.println("user");
 
-            List<VueEnchereProduitUtilisateur> enchere = new ArrayList<>();
-            vueEnchereProduitUtilisateurRepository.findAll().forEach(enchere::add);
+            List<DetailEnchere> enchere = new ArrayList<>();
+            detailEnchereRepository.findAll().forEach(enchere::add);
             if (enchere.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
@@ -38,6 +42,7 @@ public class EnchereController {
             return new ResponseEntity<>(enchere, HttpStatus.OK);
         }
         catch (Exception e){
+            e.printStackTrace();
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
@@ -56,18 +61,19 @@ public class EnchereController {
             return new ResponseEntity<>(enchere, HttpStatus.OK);
         }
         catch (Exception e){
+            e.printStackTrace();
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
 
     @GetMapping("/encheres/{iduser}")
-    public ResponseEntity<List<VueEnchereProduitUtilisateur>> allAuctionsByIdUser(@PathVariable String iduser){
+    public ResponseEntity<List<DetailEnchere>> allAuctionsByIdUser(@PathVariable String iduser){
         try {
             System.out.println("iduser" + iduser);
             System.out.println("user");
 
-            List<VueEnchereProduitUtilisateur> enchere = new ArrayList<>();
-            vueEnchereProduitUtilisateurRepository.findAllByIdutilisateur(Integer.valueOf(iduser)).forEach(enchere::add);
+            List<DetailEnchere> enchere = new ArrayList<>();
+            detailEnchereRepository.findAllByIdutilisateur(Integer.valueOf(iduser)).forEach(enchere::add);
             if (enchere.isEmpty()) {
                 return new ResponseEntity<>(HttpStatus.NO_CONTENT);
             }
