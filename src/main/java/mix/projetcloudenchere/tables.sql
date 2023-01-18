@@ -154,8 +154,26 @@ Create table PrelevementEnchere(
 
 -- View
 -- Benefice de l'utilisateur
-select u.idutilisateur,((select sum(montant) from rechargementcompte where idUtilisateur=u.idutilisateur)-(select sum(montant_offre) from surenchere where idutilisateur=u.idutilisateur)) as solde_compte from utilisateur u where  u.idutilisateur=1;
+-- select u.idutilisateur,((select sum(montant) from rechargementcompte where idUtilisateur=u.idutilisateur)-(select sum(montant_offre) from surenchere where idutilisateur=u.idutilisateur)) as solde_compte from utilisateur u where  u.idutilisateur=1;
+SELECT cp.categorie,avg(montant_offre) as moyenne from surenchere se join enchere e using(idenchere) join produit p using(idproduit) join categorieproduit cp using(idcategorieproduit) group by cp.categorie;
 
 -- Statistics
 -- les tops 3 des categories qui rapport le plus par mois
 select c.categorie,(select max(montant_offre) from surenchere group by extract(month from DateHeureMise)) as moyenne,to_char(DateHeureEnchere,'Month') as mois from produit p join CategorieProduit c using(idCategorieProduit) join Enchere e using(idProduit) join surenchere s using(idEnchere) group by c.idCategorieProduit,mois order by moyenne desc limit 3;
+
+-- Nombre d'enchere par categorie par mois
+-- 1
+select count(e.*) as nombre_enchere,c.categorie,to_char(e.DateHeureEnchere,'Month') as mois from enchere e join produit p using(idproduit) join categorieproduit c using(idcategorieproduit) group by idcategorieproduit,c.categorie,mois;
+
+-- Nombre d'enchere par mois par annee
+-- 2
+select count(e.*) as nombre_enchere,to_char(e.DateHeureEnchere,'Month') as mois,extract(year from e.DateHeureEnchere) as annee from enchere e  group by mois,annee;
+
+
+-- Les  3 categories les plus prisees
+-- 3
+select count(e.*) as nombre_enchere,c.categorie from enchere e join produit p using(idproduit) join categorieproduit c using(idcategorieproduit) group by c.categorie order by nombre_enchere DESC limit 3;
+
+-- Les clients les plus actifs 
+-- 4
+select (select count(*) from enchere where idutilisateur=u.idutilisateur) as nombre_enchere,(select count(*) from surenchere  where idutilisateur=u.idutilisateur) as nombre_mise,(select max(montant_offre) from surenchere where idutilisateur=u.idutilisateur) as mise_lapluselevee,(select concat(u.nom ,' '||u.prenom) from utilisateur where idutilisateur=u.idutilisateur) as nom_prenom from utilisateur u order by nombre_enchere,nombre_mise,mise_lapluselevee desc limit 3;
