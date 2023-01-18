@@ -5,6 +5,7 @@ import mix.projetcloudenchere.repository.RechargementcompteRepository;
 import mix.projetcloudenchere.viewsRepository.VuedetailrechargementnonvalideRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -24,31 +25,28 @@ public class ValidationController {
     @Autowired
     VuedetailrechargementnonvalideRepository nonvalide;
 
-    @GetMapping("listeRechargement")
+    @GetMapping("/listeRechargement")
     public String listeRechargement(Model model){
-        model.addAttribute("nonvalide" ,nonvalide.findAll())
+        model.addAttribute("nonvalide" ,nonvalide.findAll());
+        return "rechargementDetails";
     }
 
-    @GetMapping("/valider/{idRechargement}")
-    public String validation(@PathVariable int idRechargement)
+    @Transactional
+    @GetMapping("/listeRechargement/{idRechargement}")
+    public String validation(@PathVariable String idRechargement,Model model)
     {
         try{
-//            Initialisation listeRechargementEnAttente
-//            List<Rechargementcompte>
-
-            em.getTransaction().begin();
-
-            rechargementcompteRepository.updateRechargement(idRechargement);
-//             updating stuffs
-            em.getTransaction().commit();
-            return "ok";
+            if (idRechargement != null ){
+                System.out.println(idRechargement);
+                if (Integer.valueOf(idRechargement) instanceof Integer)
+                    rechargementcompteRepository.updateRechargement(Integer.valueOf(idRechargement));
+            }
+            model.addAttribute("nonvalide" ,nonvalide.findAll());
+            return "rechargementDetails";
         }
         catch(Exception e){
-        em.getTransaction().rollback();
+            e.printStackTrace();
         return "errorPage";
-    }
-        finally{
-        em.close();
     }
 }
 
