@@ -1,7 +1,7 @@
 package mix.projetcloudenchere.model;
 
 import javax.persistence.*;
-import java.time.Instant;
+import java.sql.Timestamp;
 
 @Entity
 @Table(name = "enchere")
@@ -29,10 +29,21 @@ public class Enchere {
     private Integer dureeenchere;
 
     @Column(name = "dateheureenchere")
-    private Instant dateheureenchere;
+    private Timestamp dateheureenchere;
 
     @Column(name = "status")
     private Integer status;
+
+
+    public Enchere(Integer idutilisateur, String description, Double prixminimumvente,Timestamp dateheureenchere , Integer dureeenchere) {
+        this.idutilisateur = idutilisateur;
+        this.description = description;
+        this.prixminimumvente = prixminimumvente;
+        this.dureeenchere = dureeenchere;
+        this.dateheureenchere = dateheureenchere;
+    }
+
+
 
     public Integer getStatus() {
         return status;
@@ -42,11 +53,11 @@ public class Enchere {
         this.status = status;
     }
 
-    public Instant getDateheureenchere() {
+    public Timestamp getDateheureenchere() {
         return dateheureenchere;
     }
 
-    public void setDateheureenchere(Instant dateheureenchere) {
+    public void setDateheureenchere(Timestamp dateheureenchere) {
         this.dateheureenchere = dateheureenchere;
     }
 
