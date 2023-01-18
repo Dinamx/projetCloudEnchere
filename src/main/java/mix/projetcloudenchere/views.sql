@@ -7,5 +7,7 @@ FROM Enchere
 inner join categorieproduit c on c.idcategorieproduit = produit.idcategorieproduit;
 
 
-
+-- Details comptes a recharger
+create or replace view vuedetailrechargementNonValides as
+    select r.idrechargementcompte,r.montant,r.dateheurechargement,u.idutilisateur,u.nom,u.prenom,u.email,u.dateinscription from rechargementcompte r join utilisateur u on u.idutilisateur = r.idutilisateur where r.validation = 0;
 
