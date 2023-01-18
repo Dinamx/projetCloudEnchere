@@ -1,7 +1,9 @@
 package mix.projetcloudenchere.controllerWeb;
 
 import mix.projetcloudenchere.model.Enchere;
+import mix.projetcloudenchere.model.Produit;
 import mix.projetcloudenchere.repository.EnchereRepository;
+import mix.projetcloudenchere.repository.ProduitRepository;
 import mix.projetcloudenchere.repository.VueEnchereProduitUtilisateurRepository;
 import mix.projetcloudenchere.views.DetailEnchere;
 import mix.projetcloudenchere.views.VueEnchereProduitUtilisateur;
@@ -9,8 +11,10 @@ import mix.projetcloudenchere.viewsRepository.DetailEnchereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -25,6 +29,8 @@ public class EnchereController {
 
     @Autowired
     DetailEnchereRepository detailEnchereRepository;
+    @Autowired
+    ProduitRepository produitRepository;
 
 
 
@@ -84,8 +90,6 @@ public class EnchereController {
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-//    Asiana ny tena hoe dates sns
     @GetMapping("/encheres/history/{iduser}")
     public ResponseEntity<List<Enchere>> getHistoryByUser(@PathVariable String iduser){
         try {
@@ -99,6 +103,21 @@ public class EnchereController {
             }
             System.out.println("retour");
             return new ResponseEntity<>(enchere, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+    @GetMapping("/encheres/")
+    @Transactional
+    public ResponseEntity<DetailEnchere> ajoutEnchere(@RequestBody DetailEnchere enchere){
+        try {
+            Timestamp now = new Timestamp(System.currentTimeMillis());
+            Produit p =produitRepository.save(new Produit(enchere.getIdutilisateur(),enchere.getNomproduit(),enchere.getDescription(),enchere.getPhoto(),enchere.getIdcategorieproduit())) ;
+            Enchere e = enchereRepository.save(new Enchere(p.getIdutilisateur(),enchere.getDescription(),enchere.getPrixminimumvente(),now, enchere.getDuree()));
+            DetailEnchere detail = detailEnchereRepository.findById(e.getId()).orElseThrow(() -> new Exception("Enchere not found"));
+            System.out.println("retour");
+            return new ResponseEntity<>(detail, HttpStatus.OK);
         }
         catch (Exception e){
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
