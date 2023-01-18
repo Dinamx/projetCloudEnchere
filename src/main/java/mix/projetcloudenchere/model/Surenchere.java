@@ -64,4 +64,11 @@ public class Surenchere {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Surenchere(Integer idenchere, Integer idutilisateur, Double montantOffre, Timestamp dateheuremise) {
+        this.idenchere = idenchere;
+        this.idutilisateur = idutilisateur;
+        this.montantOffre = montantOffre;
+        this.dateheuremise = dateheuremise;
+    }
 }

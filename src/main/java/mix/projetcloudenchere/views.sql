@@ -16,3 +16,4 @@ select e.idenchere,e.prixminimumvente,e.description as descriptionEnchere,u.idut
 
 
 -- sous vues pour voir l'actuel compte des gens
+
