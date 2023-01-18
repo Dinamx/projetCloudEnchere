@@ -5,7 +5,6 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
-import java.time.Instant;
 
 @Entity
 @Immutable
@@ -31,6 +30,12 @@ public class DetailEnchere {
     @Column(name = "prenom", length = 20)
     private String prenom;
 
+    private int duree;
+
+    public int getDuree() {
+        return duree;
+    }
+
     @Lob
 //    @Column(name = "description" , columnDefinition="TEXT")
 //    @Column(name = "description", length = 100)
@@ -52,9 +57,9 @@ public class DetailEnchere {
     private Timestamp dateheureenchere;
 
     @Column(name = "datefin")
-    private Instant datefin;
+    private Timestamp datefin;
 
-    public Instant getDatefin() {
+    public Timestamp getDatefin() {
         return datefin;
     }
 
