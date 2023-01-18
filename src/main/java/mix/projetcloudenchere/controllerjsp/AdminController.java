@@ -32,7 +32,7 @@ public class AdminController {
     public String logadmin(Model model) {
         System.out.println("ok");
         model.addAttribute("email", "admin@gmail.com");
-        model.addAttribute("mdp","admin");
+        model.addAttribute("mdp","adminpassword");
         return "Pagelogin";
     }
 
