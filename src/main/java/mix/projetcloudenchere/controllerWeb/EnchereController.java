@@ -108,18 +108,37 @@ public class EnchereController {
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-    @GetMapping("/encheres/")
+
+//POZINJAVATRA ILAINY
+//    {
+//        "prixminimumvente": 70000.0,
+//            "descriptionenchere": "Courroie en or",
+//            "idutilisateur": 2,
+//            "duree": 120,
+//            "description": "Courroie en or ",
+//            "idcategorieproduit": 1,
+//            "photo": "photo",
+//            "nomproduit": "Courroie",
+//            "dateheureenchere": "2023-01-18T17:20:05.882+00:00"
+//    }
+
+
     @Transactional
+    @PostMapping("/encheres")
     public ResponseEntity<DetailEnchere> ajoutEnchere(@RequestBody DetailEnchere enchere){
         try {
+            System.out.println("ok");
             Timestamp now = new Timestamp(System.currentTimeMillis());
             Produit p =produitRepository.save(new Produit(enchere.getIdutilisateur(),enchere.getNomproduit(),enchere.getDescription(),enchere.getPhoto(),enchere.getIdcategorieproduit())) ;
-            Enchere e = enchereRepository.save(new Enchere(p.getIdutilisateur(),enchere.getDescription(),enchere.getPrixminimumvente(),now, enchere.getDuree()));
+            System.out.println("p saved");
+            Enchere e = enchereRepository.save(new Enchere(p.getId(),p.getIdutilisateur(),enchere.getDescription(),enchere.getPrixminimumvente(),now, enchere.getDuree()));
+            System.out.println("coucou");
             DetailEnchere detail = detailEnchereRepository.findById(e.getId()).orElseThrow(() -> new Exception("Enchere not found"));
             System.out.println("retour");
             return new ResponseEntity<>(detail, HttpStatus.OK);
         }
         catch (Exception e){
+            e.printStackTrace();
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
