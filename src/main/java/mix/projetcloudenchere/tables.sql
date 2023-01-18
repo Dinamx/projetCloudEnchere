@@ -4,7 +4,7 @@ Create role enchere;
 Alter role enchere login password 'enchere';
 Alter database enchere owner to enchere;
 \c enchere enchere
-enchere
+-- enchere
 
 
 -- Supprimer toutes les tables
@@ -146,8 +146,17 @@ Create table PrelevementEnchere(
 
 
 
+
+
+
 -- View
--- Benefice de l'utilisateur
+
+
+
+-- Benefice de l'utilisateur en tout
+
+
+-- TODO SOLDE ACTUEL DE L UTILISATEUR
 select u.idutilisateur,((select sum(montant) from rechargementcompte where idUtilisateur=u.idutilisateur)-(select sum(montant_offre) from surenchere where idutilisateur=u.idutilisateur)) as solde_compte from utilisateur u where  u.idutilisateur=1;
 
 
