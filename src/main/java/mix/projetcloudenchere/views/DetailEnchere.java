@@ -30,6 +30,8 @@ public class DetailEnchere {
     @Column(name = "prenom", length = 20)
     private String prenom;
 
+//    Transient signifie que la colonne va etre ignoree , simplement.
+    @Transient
     private int duree;
 
     public int getDuree() {
