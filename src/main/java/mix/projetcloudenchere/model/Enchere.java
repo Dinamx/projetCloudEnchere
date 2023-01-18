@@ -35,7 +35,8 @@ public class Enchere {
     private Integer status;
 
 
-    public Enchere(Integer idutilisateur, String description, Double prixminimumvente,Timestamp dateheureenchere , Integer dureeenchere) {
+    public Enchere(Integer idproduit,Integer idutilisateur, String description, Double prixminimumvente,Timestamp dateheureenchere , Integer dureeenchere) {
+        this.idproduit = idproduit;
         this.idutilisateur = idutilisateur;
         this.description = description;
         this.prixminimumvente = prixminimumvente;
