@@ -121,8 +121,6 @@ public class EnchereController {
 //            "nomproduit": "Courroie",
 //            "dateheureenchere": "2023-01-18T17:20:05.882+00:00"
 //    }
-
-
     @Transactional
     @PostMapping("/encheres")
     public ResponseEntity<DetailEnchere> ajoutEnchere(@RequestBody DetailEnchere enchere){
