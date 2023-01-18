@@ -1,6 +1,7 @@
 package mix.projetcloudenchere.views;
 
 import org.hibernate.annotations.Immutable;
+import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -18,9 +19,10 @@ public class DetailEnchere {
     private Double prixminimumvente;
 
     @Column(name = "descriptionenchere", length = 100)
+
     private String descriptionenchere;
 
-    @Column(name = "idutilisateur", length = 20)
+    @Column(name = "idutilisateur")
     private Integer idutilisateur;
 
     @Column(name = "nom", length = 20)
@@ -30,14 +32,17 @@ public class DetailEnchere {
     private String prenom;
 
     @Lob
-    @Column(name = "description")
+//    @Column(name = "description" , columnDefinition="TEXT")
+//    @Column(name = "description", length = 100)
+    @Type(type = "org.hibernate.type.TextType")
     private String description;
 
     @Column(name = "idcategorieproduit")
     private Integer idcategorieproduit;
 
     @Lob
-    @Column(name = "photo")
+    @Column(name = "photo" )
+    @Type(type = "org.hibernate.type.TextType")
     private String photo;
 
     @Column(name = "nomproduit", length = 50)
@@ -81,6 +86,10 @@ public class DetailEnchere {
         return nom;
     }
 
+    public Integer getIdutilisateur() {
+        return idutilisateur;
+    }
+
     public String getDescriptionenchere() {
         return descriptionenchere;
     }
@@ -93,9 +102,6 @@ public class DetailEnchere {
         return idenchere;
     }
 
-    public Integer getIdutilisateur() {
-        return idutilisateur;
-    }
 
     protected DetailEnchere() {
     }
