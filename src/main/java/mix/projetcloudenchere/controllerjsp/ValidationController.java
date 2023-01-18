@@ -19,7 +19,7 @@ public class ValidationController {
     RechargementcompteRepository rechargementcompteRepository;
 
     @GetMapping("/valider/{idRechargement}")
-    public String validation(@PathVariable String idRechargement)
+    public String validation(@PathVariable int idRechargement)
     {
         try{
 //            Initialisation listeRechargementEnAttente
@@ -27,6 +27,7 @@ public class ValidationController {
 
             em.getTransaction().begin();
 
+            rechargementcompteRepository.updateRechargement(idRechargement);
 //             updating stuffs
             em.getTransaction().commit();
             return "ok";
