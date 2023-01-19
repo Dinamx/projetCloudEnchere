@@ -26,6 +26,17 @@ public class Utilisateur {
     @Column(name = "dateinscription")
     private LocalDate dateinscription;
 
+    public Utilisateur() {
+    }
+
+    public Utilisateur(String nom, String prenom, String email, String mdp,LocalDate now) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.email = email;
+        this.mdp = mdp;
+        this.dateinscription = now;
+    }
+
     public LocalDate getDateinscription() {
         return dateinscription;
     }
