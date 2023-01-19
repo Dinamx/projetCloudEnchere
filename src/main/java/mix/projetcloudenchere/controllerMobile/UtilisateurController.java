@@ -2,6 +2,7 @@ package mix.projetcloudenchere.controllerMobile;
 
 
 import mix.projetcloudenchere.model.Surenchere;
+import mix.projetcloudenchere.model.Tokenuser;
 import mix.projetcloudenchere.model.Utilisateur;
 import mix.projetcloudenchere.repository.UtilisateurRepository;
 import mix.projetcloudenchere.views.DetailEnchere;
@@ -42,6 +43,15 @@ public ResponseEntity<Utilisateur> surencherir(@RequestBody Utilisateur tosave) 
         return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
     }
 }
-
+//    @PostMapping("/users/signup")
+//    public ResponseEntity<Tokenuser> Connexion(@RequestBody Utilisateur tosave) {
+//        try {
+//            Timestamp now = new Timestamp(System.currentTimeMillis());
+//            Utilisateur user = utilisateurRepository.save(new Utilisateur(tosave.getNom(),tosave.getPrenom(),tosave.getEmail(),tosave.getMdp(), LocalDate.now())) ;
+//            return new ResponseEntity<>(user, HttpStatus.OK);
+//        } catch (Exception e) {
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 
 }
