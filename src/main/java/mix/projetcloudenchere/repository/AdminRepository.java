@@ -7,4 +7,5 @@ public interface AdminRepository extends JpaRepository<Admin, Integer> {
 
     Admin findByEmailAndAndMdp(String email , String mdp);
 
+
 }

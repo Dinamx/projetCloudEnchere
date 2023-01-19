@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="public/graindashboard/css/graindashboard.css">
 </head>
 <body class="has-sidebar has-fixed-sidebar-and-header">
-
 <!-- Header -->
 <header class="header bg-body">
     <nav class="navbar flex-nowrap p-0">
@@ -69,11 +68,18 @@
             <!-- End Title -->
             <!-- Documentation -->
             <li class="side-nav-menu-item">
-                <a class="side-nav-menu-link media align-items-center" href="/listeRechargement" target="_blank">
+<%--                <a class="side-nav-menu-link media align-items-center" href="/listeRechargement" target="_blank">--%>
+                <a class="side-nav-menu-link media align-items-center" href="/listeRechargement">
                         <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-file"></i>
+                            <i class="gd-money"></i>
                         </span>
                     <span class="side-nav-fadeout-on-closed media-body">Voir les payements a valider</span>
+                </a>
+                <a class="side-nav-menu-link media align-items-center" href="/stat">
+                        <span class="side-nav-menu-icon d-flex mr-3">
+                            <i class="gd-stats-up"></i>
+                        </span>
+                    <span class="side-nav-fadeout-on-closed media-body">Voir les statistiques</span>
                 </a>
             </li>
             <!-- End Documentation -->
@@ -114,7 +120,9 @@
                 </div>
             </div>
         </div>
-        <div >
+        <div class="py-4 px-3 px-md-4">
+            <div class="card mb-3 mb-md-4">
+                <div class="card-body">
             <table class="table table-striped">
                 <thead>
                 <tr>
@@ -131,7 +139,9 @@
                 <% }%>
                 </tbody>
             </table>
-        </div>
+                </div>
+                </div>
+                </div>
         <!-- Footer -->
         <footer class="small p-3 px-md-4 mt-auto">
             <div class="row justify-content-between">

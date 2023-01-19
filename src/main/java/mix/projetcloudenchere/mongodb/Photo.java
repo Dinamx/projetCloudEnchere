@@ -3,7 +3,6 @@ package mix.projetcloudenchere.mongodb;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.Id;
-
 @Document(collection = "Photos")
 public class Photo {
     @Id

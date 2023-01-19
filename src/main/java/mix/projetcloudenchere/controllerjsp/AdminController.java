@@ -4,10 +4,12 @@ package mix.projetcloudenchere.controllerjsp;
 import mix.projetcloudenchere.model.Admin;
 import mix.projetcloudenchere.model.Categorieproduit;
 import mix.projetcloudenchere.model.Tokenadmin;
-import mix.projetcloudenchere.repository.AdminRepository;
-import mix.projetcloudenchere.repository.CategorieproduitRepository;
-import mix.projetcloudenchere.repository.TokenadminRepository;
+import mix.projetcloudenchere.repository.*;
 import mix.projetcloudenchere.service.TokenService;
+import mix.projetcloudenchere.viewsRepository.CategoriePriseeRepository;
+import mix.projetcloudenchere.viewsRepository.ClientActifRepository;
+import mix.projetcloudenchere.viewsRepository.NmCategorieRepository;
+import mix.projetcloudenchere.viewsRepository.NmEnchereCategorieRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -27,6 +29,19 @@ public class AdminController {
     TokenadminRepository tokenadminRepository;
     @Autowired
     CategorieproduitRepository categorieproduitRepository;
+
+    @Autowired
+    ClientActifRepository clientActifRepository;
+
+    @Autowired
+    NmCategorieRepository nmCategorieRepository;
+
+    @Autowired
+    NmEnchereCategorieRepository nmEnchereCategorieRepository;
+
+    @Autowired
+    CategoriePriseeRepository categoriePriseeRepository;
+
 
     @GetMapping("/")
     public String logadmin(Model model) {
@@ -59,6 +74,13 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/home")
+    public String loginTraitement(Model model) throws Exception {
+            model.addAttribute("categories",categorieproduitRepository.findAll());
+            return "acceuilAdmin";
+        }
+
+
     @RequestMapping("/backOffice")
     public String backOffice(HttpServletRequest request){
 
@@ -77,4 +99,21 @@ public class AdminController {
         model.addAttribute("categories",categorieproduitRepository.findAll());
         return "acceuilAdmin";
     }
+    @GetMapping("/stat")
+    public String statistiques(Model model) {
+        try{
+            model.addAttribute("clien_actif", clientActifRepository.getClientActif());
+            model.addAttribute("nm_categorie", nmCategorieRepository.getNombreCategorie());
+        model.addAttribute("nm_enchere_categorie", nmEnchereCategorieRepository.getNmEnchereCategorie());
+        model.addAttribute("categorie_prisee", categoriePriseeRepository.getCategoriePrisee());
+        return "statistiques";
+        }
+
+        catch (Exception e){
+            e.printStackTrace();
+            return "error";
+        }
+
+    }
+
 }

@@ -8,12 +8,11 @@ import javax.persistence.*;
 @Immutable
 @Table(name = "nm_enchere_categorie")
 public class NmEnchereCategorie {
-
     @Id
     @Column(name = "nombre_enchere")
-    private Long nombreEnchere;
+    private Integer nombreEnchere;
 
-    @Column(name = "categorie", length = 20)
+    @Column(name = "categorie", length = 100)
     private String categorie;
 
     @Lob
@@ -28,7 +27,7 @@ public class NmEnchereCategorie {
         return categorie;
     }
 
-    public Long getNombreEnchere() {
+    public Integer getNombreEnchere() {
         return nombreEnchere;
     }
 

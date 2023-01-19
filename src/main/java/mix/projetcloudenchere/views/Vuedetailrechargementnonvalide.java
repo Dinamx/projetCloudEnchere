@@ -21,7 +21,7 @@ public class Vuedetailrechargementnonvalide {
     private Double montant;
 
     @Column(name = "dateheurechargement")
-    private Instant dateheurechargement;
+    private LocalDate dateheurechargement;
 
     @Column(name = "idutilisateur")
     private Integer idutilisateur;
@@ -58,7 +58,7 @@ public class Vuedetailrechargementnonvalide {
         return idutilisateur;
     }
 
-    public Instant getDateheurechargement() {
+    public LocalDate getDateheurechargement() {
         return dateheurechargement;
     }
 

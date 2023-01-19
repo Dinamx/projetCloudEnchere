@@ -9,6 +9,7 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableTransactionManagement
 @ComponentScan(basePackages = "mix.projetcloudenchere.controllerjsp")
 @ComponentScan(basePackages = "mix.projetcloudenchere.controllerWeb")
+@ComponentScan(basePackages = "mix.projetcloudenchere.controllerMobile")
 public class ProjetCloudEnchereApplication {
 
     public static void main(String[] args) {

@@ -9,7 +9,6 @@
 <%
 
 
-    List<ClientActif> clientactif = (List<ClientActif>) request.getAttribute("client_actif");
     List<NmCategorie> nmCategories = (List<NmCategorie>) request.getAttribute("nm_categorie");
     List<NmEnchereCategorie> nmEnchereCategories = (List<NmEnchereCategorie>) request.getAttribute("nm_enchere_categorie");
     List<CategoriePrisee> categoriePrisees = (List<CategoriePrisee>) request.getAttribute("categorie_prisee");
@@ -93,25 +92,6 @@
         </table>
     </div>
     <div>
-        <h3>Les clients les plus actifs </h3>
-        <table border="2">
-            <tr>
-                <th>nombre_enchere</th>
-                <th>nombre_mise</th>
-                <th>mise_lapluselevee</th>
-                <th>nom et prenom</th>
-            </tr>
-            <% for (ClientActif e : clientactif) {%>
-            <tr>
-            <td><%= e.getNombreEnchere() %></td>
-            <td><%= e.getNombreMise() %></td>
-            <td><%= e.getMiseLapluselevee() %></td>
-            <td><%= e.getNomPrenom() %></td>
-
-            </tr>
-            <% }%>
-
-        </table>
     </div>
 </div>
 
