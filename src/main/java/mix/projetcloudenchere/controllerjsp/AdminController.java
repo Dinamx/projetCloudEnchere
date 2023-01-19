@@ -102,9 +102,10 @@ public class AdminController {
     @GetMapping("/stat")
     public String statistiques(Model model) {
         try{
-            model.addAttribute("nm_categorie", nmCategorieRepository.findAll());
-        model.addAttribute("nm_enchere_categorie", nmEnchereCategorieRepository.findAll());
-        model.addAttribute("categorie_prisee", categoriePriseeRepository.findAll());
+            model.addAttribute("clien_actif", clientActifRepository.getClientActif());
+            model.addAttribute("nm_categorie", nmCategorieRepository.getNombreCategorie());
+        model.addAttribute("nm_enchere_categorie", nmEnchereCategorieRepository.getNmEnchereCategorie());
+        model.addAttribute("categorie_prisee", categoriePriseeRepository.getCategoriePrisee());
         return "statistiques";
         }
 
