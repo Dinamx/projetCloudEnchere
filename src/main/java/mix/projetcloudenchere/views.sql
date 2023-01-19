@@ -82,4 +82,10 @@ Create or replace view client_actif as
 select (select count(*) from enchere where idutilisateur=u.idutilisateur) as nombre_enchere,(select count(*) from surenchere  where idutilisateur=u.idutilisateur) as nombre_mise,(select max(montant_offre) from surenchere where idutilisateur=u.idutilisateur) as mise_lapluselevee,(select concat(u.nom ,' '||u.prenom) from utilisateur where idutilisateur=u.idutilisateur) as nom_prenom from utilisateur u order by nombre_enchere,nombre_mise,mise_lapluselevee desc limit 3;
 
 
-select clientacti0_.nombre_enchere as nombre_e1_4_, clientacti0_.mise_lapluselevee as mise_lap2_4_, clientacti0_.nom_prenom as nom_pren3_4_, clientacti0_.nombre_mise as nombre_m4_4_ from client_actif clientacti0_
+-- 5 solde d'un client (Gain en rechargement -depense en encheres)
+Create or replace view solde_utilisateur as
+select  
+coalesce((select sum(montant) from rechargementcompte where idutilisateur=u.idutilisateur and validation=1)-(select sum(montant_offre) from surenchere where idutilisateur=u.idutilisateur),0)
+as solde_actuelle,
+u.idutilisateur 
+from utilisateur u;

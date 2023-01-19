@@ -144,7 +144,13 @@ Create table PrelevementEnchere(
     dateprelevement date default current_date
 );
 
-
+-- 14
+Create table Notitfication(
+    idNotification serial not null primary key,
+    idEnchere int not null references Enchere(idEnchere),
+    idUtilisateur int not null references Utilisateur(idUtilisateur),
+    datenotif timestamp default CURRENT_TIMESTAMP
+);
 
 
 
