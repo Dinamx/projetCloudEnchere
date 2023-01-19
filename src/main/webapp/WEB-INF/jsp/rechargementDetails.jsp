@@ -145,8 +145,7 @@
                             class="gd-github"></i></a></li>
                 </ul>
             </div>
-            <div class="col-lg text-center text-lg-right"> &copy; 2023 Projet Cloud Enchere
-            </div>
+            <div class="col-lg text-center text-lg-right"> &copy; 2023 Projet Cloud Enchere</div>
         </div>
     </footer>
     <!-- End Footer -->
