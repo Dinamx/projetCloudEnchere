@@ -74,6 +74,13 @@ public class AdminController {
         }
     }
 
+    @GetMapping("/home")
+    public String loginTraitement(Model model) throws Exception {
+            model.addAttribute("categories",categorieproduitRepository.findAll());
+            return "acceuilAdmin";
+        }
+
+
     @RequestMapping("/backOffice")
     public String backOffice(HttpServletRequest request){
 

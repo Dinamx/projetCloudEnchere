@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="public/graindashboard/css/graindashboard.css">
 </head>
 <body class="has-sidebar has-fixed-sidebar-and-header">
-
 <!-- Header -->
 <header class="header bg-body">
     <nav class="navbar flex-nowrap p-0">
