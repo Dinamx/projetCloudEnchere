@@ -100,7 +100,7 @@
 
 
 <div>
-    <h3> Liste des rechargements non valides</h3>
+    <h3> Liste des rechargements non-valides</h3>
     <table>
         <tr>
             <td>Date</td>
