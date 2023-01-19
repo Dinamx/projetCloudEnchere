@@ -25,6 +25,10 @@ public class Surenchere {
     @Column(name = "dateheuremise")
     private Timestamp dateheuremise;
 
+    public Surenchere() {
+
+    }
+
     public Timestamp getDateheuremise() {
         return dateheuremise;
     }

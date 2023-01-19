@@ -39,6 +39,7 @@ public class AdminController {
     @PostMapping("/login")
     public String loginTraitement(HttpServletRequest request, Model model) throws Exception {
         HttpSession session = request.getSession(true);
+        System.out.println("log");
         String email = request.getParameter("email");
         String password = request.getParameter("password");
         if( adminRepository.findByEmailAndAndMdp(email,password) != null) {
@@ -46,9 +47,6 @@ public class AdminController {
             System.out.println();
 //            TODO Echanger cette portion de code par un tokenrepository.findByID
             Tokenadmin t = new TokenService().createToken(admin);
-
-
-
             Tokenadmin saved = tokenadminRepository.save(t);
             System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
 
@@ -57,7 +55,7 @@ public class AdminController {
             return "acceuilAdmin";
         }
         else{
-            return "Pagelogin?error=1";
+            return "acceuilAdmin?error=1";
         }
     }
 
