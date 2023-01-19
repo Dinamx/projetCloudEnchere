@@ -8,10 +8,9 @@ import javax.persistence.*;
 @Immutable
 @Table(name = "nm_categorie")
 public class NmCategorie {
-
     @Id
     @Column(name = "nombre_enchere")
-    private Long nombreEnchere;
+    private Integer nombreEnchere;
 
     @Lob
     @Column(name = "mois")
@@ -19,7 +18,6 @@ public class NmCategorie {
 
     @Column(name = "annee")
     private Double annee;
-
 
     public Double getAnnee() {
         return annee;
@@ -29,7 +27,7 @@ public class NmCategorie {
         return mois;
     }
 
-    public Long getNombreEnchere() {
+    public Integer getNombreEnchere() {
         return nombreEnchere;
     }
 

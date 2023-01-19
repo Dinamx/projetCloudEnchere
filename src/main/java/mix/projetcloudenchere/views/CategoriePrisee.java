@@ -11,20 +11,18 @@ import javax.persistence.Table;
 @Immutable
 @Table(name = "categorie_prisees")
 public class CategoriePrisee {
-
     @Id
     @Column(name = "nombre_enchere")
-    private Long nombreEnchere;
+    private Integer nombreEnchere;
 
-    @Column(name = "categorie", length = 20)
+    @Column(name = "categorie", length = 100)
     private String categorie;
-
 
     public String getCategorie() {
         return categorie;
     }
 
-    public Long getNombreEnchere() {
+    public Integer getNombreEnchere() {
         return nombreEnchere;
     }
 

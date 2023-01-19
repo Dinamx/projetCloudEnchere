@@ -59,5 +59,27 @@ select * from rechargementcompte where validation = 1;
 select sum(montant), * from rechargementcompte where validation=1 ,
 
 
+-- Nombre d'enchere par categorie par mois
+
+-- 1
+Create or replace view nm_enchere_categorie as
+select count(e.*) as nombre_enchere,c.categorie,to_char(e.DateHeureEnchere,'Month') as mois from enchere e join produit p using(idproduit) join categorieproduit c using(idcategorieproduit) group by idcategorieproduit,c.categorie,mois;
+
+-- Nombre d'enchere par mois par annee
+-- 2
+Create or replace view nm_categorie as
+select count(e.*) as nombre_enchere,to_char(e.DateHeureEnchere,'Month') as mois,extract(year from e.DateHeureEnchere) as annee from enchere e  group by mois,annee;
 
 
+-- Les  3 categories les plus prisees
+-- 3
+Create or replace view categorie_prisees as
+select count(e.*) as nombre_enchere,c.categorie from enchere e join produit p using(idproduit) join categorieproduit c using(idcategorieproduit) group by c.categorie order by nombre_enchere DESC limit 3;
+
+-- Les clients les plus actifs
+-- 4
+Create or replace view client_actif as
+select (select count(*) from enchere where idutilisateur=u.idutilisateur) as nombre_enchere,(select count(*) from surenchere  where idutilisateur=u.idutilisateur) as nombre_mise,(select max(montant_offre) from surenchere where idutilisateur=u.idutilisateur) as mise_lapluselevee,(select concat(u.nom ,' '||u.prenom) from utilisateur where idutilisateur=u.idutilisateur) as nom_prenom from utilisateur u order by nombre_enchere,nombre_mise,mise_lapluselevee desc limit 3;
+
+
+select clientacti0_.nombre_enchere as nombre_e1_4_, clientacti0_.mise_lapluselevee as mise_lap2_4_, clientacti0_.nom_prenom as nom_pren3_4_, clientacti0_.nombre_mise as nombre_m4_4_ from client_actif clientacti0_
