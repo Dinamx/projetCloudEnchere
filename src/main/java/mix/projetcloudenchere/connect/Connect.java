@@ -11,7 +11,8 @@ public class Connect {
     public Connect() {
         try {
             Class.forName("org.postgresql.Driver");
-            this.con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cloudenchere", "postgres", "root");
+            this.con = DriverManager.getConnection("jdbc:postgresql://dumbo.db.elephantsql.com:5432/dwujqywc", "dwujqywc", "vDkbmEKvvGSIMUAEwxQCTVIdMTtX2nST");
+//            this.con = DriverManager.getConnection("jdbc:postgresql://localhost:5432/cloudenchere", "postgres", "root");
         }
         catch (Exception e)
         {
