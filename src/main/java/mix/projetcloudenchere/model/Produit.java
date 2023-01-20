@@ -86,4 +86,7 @@ public class Produit {
         this.photo = photo;
         this.idcategorieproduit = idcategorieproduit;
     }
+
+    public Produit() {
+    }
 }

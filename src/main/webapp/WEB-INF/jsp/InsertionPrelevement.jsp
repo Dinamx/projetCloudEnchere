@@ -1,11 +1,12 @@
 <%@ page import="java.util.List" %>
 <%@ page import="mix.projetcloudenchere.model.Categorieproduit" %>
+<%@ page import="mix.projetcloudenchere.model.Pourcentageprelevee" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8"%>
 <%
 
 
-    List<Categorieproduit> categorieproduits = (List<Categorieproduit>) request.getAttribute("categories");
+    List<Pourcentageprelevee> pourcentageprelevees = (List<Pourcentageprelevee>) request.getAttribute("categories");
 %>
 <html>
 <head>
@@ -68,24 +69,18 @@
             <!-- End Title -->
             <!-- Documentation -->
             <li class="side-nav-menu-item">
-<%--                <a class="side-nav-menu-link media align-items-center" href="/listeRechargement" target="_blank">--%>
+                <%--                <a class="side-nav-menu-link media align-items-center" href="/listeRechargement" target="_blank">--%>
                 <a class="side-nav-menu-link media align-items-center" href="/listeRechargement">
                         <span class="side-nav-menu-icon d-flex mr-3">
                             <i class="gd-money"></i>
                         </span>
-                    <span class="side-nav-fadeout-on-closed media-body">Voir les payements a valider</span>
+                    <span class="side-nav-fadeout-on-closed media-body">Inserer une nouvelle Categorie</span>
                 </a>
                 <a class="side-nav-menu-link media align-items-center" href="/stat">
                         <span class="side-nav-menu-icon d-flex mr-3">
                             <i class="gd-stats-up"></i>
                         </span>
                     <span class="side-nav-fadeout-on-closed media-body">Voir les statistiques</span>
-                </a>
-                <a class="side-nav-menu-link media align-items-center" href="/prelevement">
-                        <span class="side-nav-menu-icon d-flex mr-3">
-                            <i class="gd-money"></i>
-                        </span>
-                    <span class="side-nav-fadeout-on-closed media-body">Prelevement</span>
                 </a>
             </li>
             <!-- End Documentation -->
@@ -100,25 +95,25 @@
                     <nav class="d-none d-md-block" aria-label="breadcrumb">
                         <ol class="breadcrumb">
                             <li class="breadcrumb-item">
-                                <a href="#">Categories</a>
+                                <a href="#">Prelevement</a>
                             </li>
-                            <li class="breadcrumb-item active" aria-current="page">Creer une nouvelle categorie</li>
+                            <li class="breadcrumb-item active" aria-current="page">Changer le prelevement pour les encheres</li>
                         </ol>
                     </nav>
                     <!-- End Breadcrumb -->
                     <div class="mb-3 mb-md-4 d-flex justify-content-between">
-                        <div class="h3 mb-0">Ajouter une categorie</div>
+                        <div class="h3 mb-0">Choisir le prelevement a prendre</div>
                     </div>
                     <!-- Form -->
                     <div>
-                        <form method="post" action="/categories">
+                        <form method="post" action="/prelevement">
                             <div  class="form-row">
                                 <div class="form-group col-12 col-md-6">
-                                    <label for="name">Categorie</label>
-                                    <input type="text" class="form-control" value="" id="name" name="categorie"
-                                           placeholder="Nom Categorie">
+                                    <label for="name">Prelevement a prendre</label>
+                                    <input type="number" step="0.01" min="0" max="100" class="form-control" value="" id="name" name="prelevement"
+                                           placeholder="Pourcentage">
                                 </div>
-                            <button type="submit" class="btn btn-primary btn-sm">Valider</button>
+                                <button type="submit" class="btn btn-primary btn-sm">Valider</button>
                             </div>
                         </form>
                     </div>
@@ -129,38 +124,28 @@
         <div class="py-4 px-3 px-md-4">
             <div class="card mb-3 mb-md-4">
                 <div class="card-body">
-            <table class="table table-striped">
-                <thead>
-                <tr>
-                    <th class="font-weight-semi-bold border-top-0 py-2">id</th>
-                    <th class="font-weight-semi-bold border-top-0 py-2">Categorie</th>
-                </tr>
-                </thead>
-                <tbody>
-                <% for (Categorieproduit e : categorieproduits) {%>
-                <tr>
-                    <td class="py-3"><%= e.getId() %></td>
-                    <td class="py-3"><%= e.getCategorie() %></td>
-                </tr>
-                <% }%>
-                </tbody>
-            </table>
+                    <table class="table table-striped">
+                        <thead>
+                        <tr>
+                            <th class="font-weight-semi-bold border-top-0 py-2">Pourcentage</th>
+                            <th class="font-weight-semi-bold border-top-0 py-2">Date definition</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <% for (Pourcentageprelevee e : pourcentageprelevees) {%>
+                        <tr>
+                            <td class="py-3"><%= e.getId() %></td>
+                            <td class="py-3"><%= e.getDate() %></td>
+                        </tr>
+                        <% }%>
+                        </tbody>
+                    </table>
                 </div>
-                </div>
-                </div>
+            </div>
+        </div>
         <!-- Footer -->
         <footer class="small p-3 px-md-4 mt-auto">
             <div class="row justify-content-between">
-<%--                <div class="col-lg text-center text-lg-left mb-3 mb-lg-0">--%>
-<%--                    <ul class="list-dot list-inline mb-0">--%>
-<%--                        <li class="list-dot-item list-dot-item-not list-inline-item mr-lg-2"><a class="link-dark"--%>
-<%--                                                                                                href="#">FAQ</a></li>--%>
-<%--                        <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Support</a>--%>
-<%--                        </li>--%>
-<%--                        <li class="list-dot-item list-inline-item mr-lg-2"><a class="link-dark" href="#">Contact--%>
-<%--                            us</a></li>--%>
-<%--                    </ul>--%>
-<%--                </div>--%>
                 <div class="col-lg text-center mb-3 mb-lg-0">
                     <ul class="list-inline mb-0">
                         <li class="list-inline-item mx-2"><a class="link-muted" href="#"><i

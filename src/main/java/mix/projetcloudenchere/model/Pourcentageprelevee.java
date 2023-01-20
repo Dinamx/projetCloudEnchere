@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.sql.Timestamp;
 import java.time.Instant;
 
 @Entity
@@ -17,13 +18,13 @@ public class Pourcentageprelevee {
     private Double pourcentage;
 
     @Column(name = "date")
-    private Instant date;
+    private Timestamp date;
 
-    public Instant getDate() {
+    public Timestamp getDate() {
         return date;
     }
 
-    public void setDate(Instant date) {
+    public void setDate(Timestamp date) {
         this.date = date;
     }
 
@@ -41,5 +42,13 @@ public class Pourcentageprelevee {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Pourcentageprelevee(Double pourcentage, Timestamp date) {
+        this.pourcentage = pourcentage;
+        this.date = date;
+    }
+
+    public Pourcentageprelevee() {
     }
 }

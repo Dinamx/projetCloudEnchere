@@ -30,7 +30,6 @@ public class PhotoController {
     @GetMapping("/photos/{idproduit}")
     public ResponseEntity<List<Photo>> listePhotos(@PathVariable String idproduit ) {
         try {
-
             return new ResponseEntity<>(photoRepository.findAllByIdproduit(idproduit), HttpStatus.OK);
         } catch (Exception e) {
             e.printStackTrace();
@@ -38,7 +37,6 @@ public class PhotoController {
         }
 
     }
-
 //    Format requete
 //    {
 //      "idproduit": "1",

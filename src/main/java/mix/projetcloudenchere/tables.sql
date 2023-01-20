@@ -153,9 +153,15 @@ Create table Notitfication(
 );
 
 
+create sequence pourcentageprelevee_id_seq
+    as integer;
 
+alter table pourcentageprelevee alter column id set default nextval('public.pourcentageprelevee_id_seq'::regclass);
+
+alter sequence pourcentageprelevee_id_seq owned by pourcentageprelevee.id;
 
 -- View
+
 
 
 
