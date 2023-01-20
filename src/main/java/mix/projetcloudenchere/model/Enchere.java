@@ -44,6 +44,9 @@ public class Enchere {
         this.dateheureenchere = dateheureenchere;
     }
 
+    public Enchere() {
+
+    }
 
 
     public Integer getStatus() {
