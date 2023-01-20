@@ -137,11 +137,11 @@
                 <div class="card-body">
                     <nav aria-label="breadcrumb">
                         <ol class="breadcrumb">
-                            <li class="breadcrumb-item">Encheres</li>
-                            <li class="breadcrumb-item active" aria-current="page">Par categorie</li>
+                            <li class="breadcrumb-item">Client</li>
+                            <li class="breadcrumb-item active" aria-current="page">Par mois</li>
                         </ol>
                     </nav>
-                    <h3>Les clients les plus actifs</h3>
+                    <h3>Les clients les plus actifs selon le mois</h3>
                     <table class="table table-striped">
                         <thead>
                         <tr>
@@ -189,8 +189,8 @@
                         <tbody>
                         <% for (CategoriePrisee e : categoriePrisees) {%>
                         <tr>
-                            <td class="py-3">><%= e.getNombreEnchere() %></td>
-                            <td class="py-3">><%= e.getCategorie() %></td>
+                            <td class="py-3"><%= e.getNombreEnchere() %></td>
+                            <td class="py-3"><%= e.getCategorie() %></td>
                         </tr>
                         <% }%>
                         </tbody>
@@ -217,31 +217,6 @@
     <!-- End Footer -->
     </div>
 </main>
-
-
-    <h1>Tableau statistiques</h1>
-<div>
-
-    <div>
-
-
-
-        </table>
-    </div>
-
-
-    <div>
-        <h3>Les 3 categories les plus prisees</h3>
-
-    </div>
-    <div>
-    </div>
-</div>
-
-<div>
-    <p><button><a href="acceuilAdmin.jsp">Retour</a></button></p>
-</div>
-
 </body>
 
 </html>

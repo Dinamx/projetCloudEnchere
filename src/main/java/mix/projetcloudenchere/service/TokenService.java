@@ -3,6 +3,8 @@ package mix.projetcloudenchere.service;
 
 import mix.projetcloudenchere.model.Admin;
 import mix.projetcloudenchere.model.Tokenadmin;
+import mix.projetcloudenchere.model.Tokenuser;
+import mix.projetcloudenchere.model.Utilisateur;
 
 import java.security.MessageDigest;
 import java.sql.Date;
@@ -43,11 +45,24 @@ public class TokenService {
         LocalDate creation = LocalDate.now();
         System.out.println("creation = " + creation);
 
-        LocalDate expiration = LocalDate.now().plusDays(1);
+        LocalDate expiration = LocalDate.now().plusDays(3);
         System.out.println("creation = " + expiration);
 
 
         return new Tokenadmin(admin,token,creation,expiration);
+    }
+
+    public Tokenuser createTokenUser(Utilisateur admin) throws Exception {
+        System.out.println("Utilisateur id " + admin.getId());
+        int idadmin = Integer.valueOf(admin.getId());
+        String token = generateToken(String.valueOf(admin.getId()));
+        LocalDate creation = LocalDate.now();
+        System.out.println("creation = " + creation);
+        LocalDate expiration = LocalDate.now().plusDays(3);
+        System.out.println("creation = " + expiration);
+
+
+        return new Tokenuser(admin,token,creation,expiration);
     }
 
     public Tokenadmin updateToken(Tokenadmin tokenadmin) throws Exception {

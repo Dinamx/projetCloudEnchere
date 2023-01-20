@@ -27,6 +27,17 @@ public class Tokenuser {
     @Column(name = "role", length = 10)
     private String role;
 
+    public Tokenuser(Utilisateur admin, String token, LocalDate creation, LocalDate expiration) {
+        this.idutilisateur = admin ;
+        this.token = token;
+        this.datecreation = creation;
+        this.dateexpiration = expiration;
+    }
+
+    public Tokenuser() {
+
+    }
+
     public String getRole() {
         return role;
     }
