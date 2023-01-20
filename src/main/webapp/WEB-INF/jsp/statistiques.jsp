@@ -169,18 +169,6 @@
 <%--        FIN tableau 2--%>
 
 <%--        Tableau 3--%>
-        <table border="2">
-            <tr>
-                <th>nombre_enchere</th>
-                <th>categorie</th>
-
-            </tr>
-            <tr>
-
-            </tr>
-
-        </table>
-
         <div class="row py-4 px-3 px-md-4 ">
             <div class="card mb-3 mb-md-4">
                 <div class="card-body">
@@ -195,9 +183,7 @@
                         <thead>
                         <tr>
                             <th class="font-weight-semi-bold border-top-0 py-2">Nombre d'encheres</th>
-                            <th class="font-weight-semi-bold border-top-0 py-2">Nom et prenom</th>
-                            <th class="font-weight-semi-bold border-top-0 py-2">Mois</th>
-                            <th class="font-weight-semi-bold border-top-0 py-2">Année</th>
+                            <th class="font-weight-semi-bold border-top-0 py-2">Categorie</th>
                         </tr>
                         </thead>
                         <tbody>
