@@ -107,4 +107,33 @@ public class VueEnchereProduitUtilisateur {
 
     protected VueEnchereProduitUtilisateur() {
     }
+    public VueEnchereProduitUtilisateur(Integer idenchere, Integer idutilisateur, String nom, String prenom, Integer idproduit, String nomproduit, String description, Double prixminimumvente, Integer dureeenchere, Timestamp dateheureenchere, Integer status, Integer idcategorieproduit, String categorie) {
+        this.idenchere = idenchere;
+        this.idutilisateur = idutilisateur;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.idproduit = idproduit;
+        this.nomproduit = nomproduit;
+        this.description = description;
+        this.prixminimumvente = prixminimumvente;
+        this.dureeenchere = dureeenchere;
+        this.dateheureenchere = this.dateheureenchere;
+        this.status = status;
+        this.idcategorieproduit = idcategorieproduit;
+        this.categorie = categorie;
+    }
+
+    public VueEnchereProduitUtilisateur(String nom, String prenom, Integer idproduit, String nomproduit, String description, Double prixminimumvente, Integer dureeenchere, Timestamp dateheureenchere, Integer status, Integer idcategorieproduit, String categorie) {
+        this.nom = nom;
+        this.prenom = prenom;
+        this.idproduit = idproduit;
+        this.nomproduit = nomproduit;
+        this.description = description;
+        this.prixminimumvente = prixminimumvente;
+        this.dureeenchere = dureeenchere;
+        this.dateheureenchere = dateheureenchere;
+        this.status = status;
+        this.idcategorieproduit = idcategorieproduit;
+        this.categorie = categorie;
+    }
 }
