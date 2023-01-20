@@ -54,35 +54,55 @@ public class AdminController {
 
     @PostMapping("/login")
     public String loginTraitement(HttpServletRequest request, Model model) throws Exception {
-        try {
-            HttpSession session = request.getSession(true);
-            System.out.println("log");
-            String email = request.getParameter("email");
-            String password = request.getParameter("password");
-            if (adminRepository.findByEmailAndMdp(email, password) != null) {
-                Admin admin = adminRepository.findByEmailAndMdp(email, password);
-                System.out.println(admin.getId());
-                if (tokenadminRepository.existsTokenadminByIdadmin((Integer) admin.getId())) {
-                    System.out.println("now exist");
-                    tokenadminRepository.updateToken(admin.getId(), LocalDate.now());
-                    System.out.println("now existe");
+        HttpSession session = request.getSession(true);
+        System.out.println("log");
+        String email = request.getParameter("email");
+        String password = request.getParameter("password");
+        if( adminRepository.findByEmailAndMdp(email,password) != null) {
+            Admin admin = adminRepository.findByEmailAndMdp(email, password);
+            System.out.println();
 
-                } else {
-                    Tokenadmin t = new TokenService().createToken(admin);
-                    Tokenadmin saved = tokenadminRepository.save(t);
-                    System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
-                }
-                model.addAttribute("categories", categorieproduitRepository.findAll());
-                return "acceuilAdmin";
-            } else {
-                return "acceuilAdmin?error=1";
-            }
+            Tokenadmin t = new TokenService().createToken(admin);
+            Tokenadmin saved = tokenadminRepository.save(t);
+            System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
+            model.addAttribute("categories",categorieproduitRepository.findAll());
+            return "acceuilAdmin";
         }
-        catch (Exception e){
-            e.printStackTrace();
+        else{
             return "acceuilAdmin?error=1";
         }
     }
+
+//    public String loginTraitement(HttpServletRequest request, Model model) throws Exception {
+//        try {
+//            HttpSession session = request.getSession(true);
+//            System.out.println("log");
+//            String email = request.getParameter("email");
+//            String password = request.getParameter("password");
+//            if (adminRepository.findByEmailAndMdp(email, password) != null) {
+//                Admin admin = adminRepository.findByEmailAndMdp(email, password);
+//                System.out.println(admin.getId());
+//                if (tokenadminRepository.existsTokenadminByIdadmin((Integer) admin.getId())) {
+//                    System.out.println("now exist");
+//                    tokenadminRepository.updateToken(admin.getId(), LocalDate.now());
+//                    System.out.println("now existe");
+//
+//                } else {
+//                    Tokenadmin t = new TokenService().createToken(admin);
+//                    Tokenadmin saved = tokenadminRepository.save(t);
+//                    System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
+//                }
+//                model.addAttribute("categories", categorieproduitRepository.findAll());
+//                return "acceuilAdmin";
+//            } else {
+//                return "acceuilAdmin?error=1";
+//            }
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            return "acceuilAdmin?error=1";
+//        }
+//    }
 
     @GetMapping("/home")
     public String loginTraitement(Model model) throws Exception {
