@@ -29,33 +29,50 @@ public class RechercheController {
 
 
 
-    @PostMapping("/enchereproduitutilisateur")
-    public static List<VueEnchereProduitUtilisateur> advancedSearch(@RequestBody VueEnchereProduitUtilisateur produit) {
+//    @PostMapping("/enchereproduitutilisateur")
+//    public static List<VueEnchereProduitUtilisateur> advancedSearch(@RequestBody VueEnchereProduitUtilisateur produit) {
+//        List<VueEnchereProduitUtilisateur> encheres= null;
+//
+//        try {
+////        PreparedStatement stmt = ed.generateStatement(con1,startDate,idcategory,status,prix,nomproduit);
+//
+//            System.out.println("bonjour" + String.valueOf(produit.getDateheureenchere()) + produit.getIdcategorieproduit() + produit.getStatus() + produit.getPrixminimumvente() + produit.getNomproduit() );
+//        PreparedStatement stmt = ed.generateStatement(con1,String.valueOf(produit.getDateheureenchere()),produit.getIdcategorieproduit(),produit.getStatus(),produit.getPrixminimumvente(),produit.getNomproduit());
+//
+//
+//
+//            encheres = ed.getListEnchereRecherche(stmt);
+//
+//
+//
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//        return encheres;
+//
+//    }
+    @PostMapping("/searches")
+    public static List<VueEnchereProduitUtilisateur> advancedSearches(@RequestParam(required = false, value="dateheureenchere") String dateheureenchere,
+                                        @RequestParam(required = false, value="idcategorie") int  idcategorie,
+                                        @RequestParam(required = false, value="status") int status,
+                                        @RequestParam(required = false, value="prixminimumvente") double prixminimumvente ,
+                                        @RequestParam(required = false, value="nomproduit") String nomproduit ){
+
+        PreparedStatement stmt = ed.generateStatement(con1,dateheureenchere,idcategorie,status,prixminimumvente,nomproduit);
         List<VueEnchereProduitUtilisateur> encheres= null;
-
         try {
-//        PreparedStatement stmt = ed.generateStatement(con1,startDate,idcategory,status,prix,nomproduit);
-
-            System.out.println("bonjour" + String.valueOf(produit.getDateheureenchere()) + produit.getIdcategorieproduit() + produit.getStatus() + produit.getPrixminimumvente() + produit.getNomproduit() );
-        PreparedStatement stmt = ed.generateStatement(con1,String.valueOf(produit.getDateheureenchere()),produit.getIdcategorieproduit(),produit.getStatus(),produit.getPrixminimumvente(),produit.getNomproduit());
-
-
-
             encheres = ed.getListEnchereRecherche(stmt);
-
-
-
+//                con1.getConnection().close();
         } catch (Exception e) {
-            e.printStackTrace();
         }
         return encheres;
 
     }
 
-//    public static void main(String[] args){
-//        List<VueEnchereProduitUtilisateur> advancedSearch=advancedSearch("2023-10-16",0,0,70000,"echa");
-//        for(int i=0;i<advancedSearch.size();i++){
-//            System.out.println(advancedSearch.get(i).getNomproduit());
-//        }
-//    }
+    public static void main(String[] args){
+        List<VueEnchereProduitUtilisateur> advancedSearch=advancedSearches("",0,0,0,"");
+        for(int i=0;i<advancedSearch.size();i++){
+            System.out.println(advancedSearch.get(i).getNomproduit());
+        }
+    }
 }

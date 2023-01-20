@@ -136,4 +136,12 @@ public class VueEnchereProduitUtilisateur {
         this.idcategorieproduit = idcategorieproduit;
         this.categorie = categorie;
     }
+
+    public VueEnchereProduitUtilisateur(String nomproduit, Double prixminimumvente, Timestamp dateheureenchere, Integer status, Integer idcategorieproduit) {
+        this.nomproduit = nomproduit;
+        this.prixminimumvente = prixminimumvente;
+        this.dateheureenchere = dateheureenchere;
+        this.status = status;
+        this.idcategorieproduit = idcategorieproduit;
+    }
 }
