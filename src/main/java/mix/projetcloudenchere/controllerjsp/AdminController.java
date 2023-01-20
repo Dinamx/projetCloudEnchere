@@ -19,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.time.LocalDate;
 
 @Controller
 public class AdminController {
@@ -53,23 +54,32 @@ public class AdminController {
 
     @PostMapping("/login")
     public String loginTraitement(HttpServletRequest request, Model model) throws Exception {
-        HttpSession session = request.getSession(true);
-        System.out.println("log");
-        String email = request.getParameter("email");
-        String password = request.getParameter("password");
-        if( adminRepository.findByEmailAndAndMdp(email,password) != null) {
-            Admin admin = adminRepository.findByEmailAndAndMdp(email, password);
-            System.out.println();
-//            TODO Echanger cette portion de code par un tokenrepository.findByID
-            Tokenadmin t = new TokenService().createToken(admin);
-            Tokenadmin saved = tokenadminRepository.save(t);
-            System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
+        try {
+            HttpSession session = request.getSession(true);
+            System.out.println("log");
+            String email = request.getParameter("email");
+            String password = request.getParameter("password");
+            if (adminRepository.findByEmailAndMdp(email, password) != null) {
+                Admin admin = adminRepository.findByEmailAndMdp(email, password);
+                System.out.println(admin.getId());
+                if (tokenadminRepository.existsTokenadminByIdadmin((Integer) admin.getId())) {
+                    System.out.println("now exist");
+                    tokenadminRepository.updateToken(admin.getId(), LocalDate.now());
+                    System.out.println("now existe");
 
-//            Liste des Categories Existances
-            model.addAttribute("categories",categorieproduitRepository.findAll());
-            return "acceuilAdmin";
+                } else {
+                    Tokenadmin t = new TokenService().createToken(admin);
+                    Tokenadmin saved = tokenadminRepository.save(t);
+                    System.out.println("LoginAdmin" + t.getToken() + t.getId() + t.getRole());
+                }
+                model.addAttribute("categories", categorieproduitRepository.findAll());
+                return "acceuilAdmin";
+            } else {
+                return "acceuilAdmin?error=1";
+            }
         }
-        else{
+        catch (Exception e){
+            e.printStackTrace();
             return "acceuilAdmin?error=1";
         }
     }
