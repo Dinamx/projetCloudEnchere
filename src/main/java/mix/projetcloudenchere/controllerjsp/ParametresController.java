@@ -19,9 +19,10 @@ public class ParametresController {
 
     @PostMapping("/prelevement")
     public String addPrelevement(HttpServletRequest request, Model model){
-        double nomCategorie = Double.valueOf(request.getParameter("prelevement"));
-        pourcentagepreleveeRepository.save(new Pourcentageprelevee(nomCategorie,new Timestamp(System.currentTimeMillis())));
-
+        System.out.println("requete tonga" + request.getParameter("prelevement") );
+        double nomCategorie = (Double) Double.valueOf(request.getParameter("prelevement"));
+        Pourcentageprelevee pel=new  Pourcentageprelevee(nomCategorie , new Timestamp(System.currentTimeMillis()));
+        pourcentagepreleveeRepository.save(pel);
         model.addAttribute("categories",pourcentagepreleveeRepository.findAll());
         return "InsertionPrelevement";
     }

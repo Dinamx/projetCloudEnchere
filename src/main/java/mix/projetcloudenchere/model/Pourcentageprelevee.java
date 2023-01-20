@@ -1,9 +1,6 @@
 package mix.projetcloudenchere.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.sql.Timestamp;
 import java.time.Instant;
 
@@ -11,6 +8,7 @@ import java.time.Instant;
 @Table(name = "pourcentageprelevee")
 public class Pourcentageprelevee {
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private Integer id;
 
@@ -50,5 +48,9 @@ public class Pourcentageprelevee {
     }
 
     public Pourcentageprelevee() {
+    }
+
+    public Pourcentageprelevee(Double pourcentage) {
+        this.pourcentage = pourcentage;
     }
 }

@@ -134,7 +134,7 @@
                         <tbody>
                         <% for (Pourcentageprelevee e : pourcentageprelevees) {%>
                         <tr>
-                            <td class="py-3"><%= e.getId() %></td>
+                            <td class="py-3"><%= e.getPourcentage() %></td>
                             <td class="py-3"><%= e.getDate() %></td>
                         </tr>
                         <% }%>
