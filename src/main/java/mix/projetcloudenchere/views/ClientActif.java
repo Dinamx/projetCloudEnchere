@@ -9,16 +9,18 @@ import javax.persistence.*;
 @Table(name = "client_actif")
 public class ClientActif {
     @Id
+    @Column(name = "idutilisateur")
+    private Integer idutilisateur;
+
     @Column(name = "nombre_enchere")
     private Integer nombreEnchere;
 
     @Column(name = "nombre_mise")
-    private Long nombreMise;
+    private Integer nombreMise;
 
     @Column(name = "mise_lapluselevee")
     private Double miseLapluselevee;
 
-    @Lob
     @Column(name = "nom_prenom")
     private String nomPrenom;
 
@@ -30,12 +32,16 @@ public class ClientActif {
         return miseLapluselevee;
     }
 
-    public Long getNombreMise() {
+    public Integer getNombreMise() {
         return nombreMise;
     }
 
     public Integer getNombreEnchere() {
         return nombreEnchere;
+    }
+
+    public Integer getIdutilisateur() {
+        return idutilisateur;
     }
 
     protected ClientActif() {

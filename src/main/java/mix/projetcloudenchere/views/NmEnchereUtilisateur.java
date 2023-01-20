@@ -6,13 +6,18 @@ import javax.persistence.*;
 
 @Entity
 @Immutable
-@Table(name = "nm_categorie")
-public class NmCategorie {
+@Table(name = "nm_enchere_utilisateur")
+public class NmEnchereUtilisateur {
     @Id
+    @Column(name = "idutilisateur")
+    private Integer idutilisateur;
+
+    @Column(name = "nom_prenom")
+    private String nomPrenom;
+
     @Column(name = "nombre_enchere")
     private Integer nombreEnchere;
 
-    @Lob
     @Column(name = "mois")
     private String mois;
 
@@ -31,6 +36,14 @@ public class NmCategorie {
         return nombreEnchere;
     }
 
-    protected NmCategorie() {
+    public String getNomPrenom() {
+        return nomPrenom;
+    }
+
+    public Integer getIdutilisateur() {
+        return idutilisateur;
+    }
+
+    protected NmEnchereUtilisateur() {
     }
 }

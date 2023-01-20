@@ -11,9 +11,9 @@ import javax.persistence.Table;
 @Immutable
 @Table(name = "categorie_prisees")
 public class CategoriePrisee {
-
     @Id
-    private Integer idfactice;
+    @Column(name = "idcategorieproduit")
+    private Integer idcategorieproduit;
 
     @Column(name = "nombre_enchere")
     private Integer nombreEnchere;
@@ -27,6 +27,10 @@ public class CategoriePrisee {
 
     public Integer getNombreEnchere() {
         return nombreEnchere;
+    }
+
+    public Integer getIdcategorieproduit() {
+        return idcategorieproduit;
     }
 
     protected CategoriePrisee() {

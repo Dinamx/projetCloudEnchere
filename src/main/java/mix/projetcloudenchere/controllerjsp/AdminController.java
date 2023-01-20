@@ -8,8 +8,8 @@ import mix.projetcloudenchere.repository.*;
 import mix.projetcloudenchere.service.TokenService;
 import mix.projetcloudenchere.viewsRepository.CategoriePriseeRepository;
 import mix.projetcloudenchere.viewsRepository.ClientActifRepository;
-import mix.projetcloudenchere.viewsRepository.NmCategorieRepository;
 import mix.projetcloudenchere.viewsRepository.NmEnchereCategorieRepository;
+import mix.projetcloudenchere.viewsRepository.NmEnchereUtilisateurRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -19,7 +19,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.time.LocalDate;
 
 @Controller
 public class AdminController {
@@ -35,7 +34,7 @@ public class AdminController {
     ClientActifRepository clientActifRepository;
 
     @Autowired
-    NmCategorieRepository nmCategorieRepository;
+    NmEnchereUtilisateurRepository nmEnchereUtilisateurRepository;
 
     @Autowired
     NmEnchereCategorieRepository nmEnchereCategorieRepository;
@@ -129,13 +128,13 @@ public class AdminController {
         model.addAttribute("categories",categorieproduitRepository.findAll());
         return "acceuilAdmin";
     }
-    @GetMapping("/stat")
+    @GetMapping("stat")
     public String statistiques(Model model) {
         try{
-            model.addAttribute("clien_actif", clientActifRepository.getClientActif());
-            model.addAttribute("nm_categorie", nmCategorieRepository.getNombreCategorie());
-        model.addAttribute("nm_enchere_categorie", nmEnchereCategorieRepository.getNmEnchereCategorie());
-        model.addAttribute("categorie_prisee", categoriePriseeRepository.getCategoriePrisee());
+            model.addAttribute("clien_actif", clientActifRepository.findAll());
+            model.addAttribute("nm_enchere_utilisateur", nmEnchereUtilisateurRepository.findAll());
+        model.addAttribute("nm_enchere_categorie", nmEnchereCategorieRepository.findAll());
+        model.addAttribute("categorie_prisee", categoriePriseeRepository.findAll());
         return "statistiques";
         }
 

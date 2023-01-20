@@ -9,13 +9,15 @@ import javax.persistence.*;
 @Table(name = "nm_enchere_categorie")
 public class NmEnchereCategorie {
     @Id
+    @Column(name = "idcategorieproduit")
+    private Integer idcategorieproduit;
+
     @Column(name = "nombre_enchere")
     private Integer nombreEnchere;
 
     @Column(name = "categorie", length = 100)
     private String categorie;
 
-    @Lob
     @Column(name = "mois")
     private String mois;
 
@@ -29,6 +31,10 @@ public class NmEnchereCategorie {
 
     public Integer getNombreEnchere() {
         return nombreEnchere;
+    }
+
+    public Integer getIdcategorieproduit() {
+        return idcategorieproduit;
     }
 
     protected NmEnchereCategorie() {
