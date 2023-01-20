@@ -5,8 +5,8 @@
 <head>
 
 
-s<%--    <link rel="shortcut icon" href="public/img/favicon.ico">--%>
-    <link rel="stylesheet" href="/public/graindashboard/css/graindashboard.css">
+<%--    <link rel="shortcut icon" href="public/img/favicon.ico">--%>
+    <link rel="stylesheet" href="public/graindashboard/css/graindashboard.css">
 
 
 
