@@ -11,7 +11,7 @@
 <html>
 <head>
     <title>Login administrateur</title>
-    <link rel="stylesheet" href="public/graindashboard/css/graindashboard.css">
+    <link rel="stylesheet" href="/public/graindashboard/css/graindashboard.css">
 </head>
 <body class="has-sidebar has-fixed-sidebar-and-header">
 <!-- Header -->
