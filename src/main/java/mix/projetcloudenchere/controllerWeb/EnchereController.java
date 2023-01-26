@@ -129,7 +129,7 @@ public class EnchereController {
             Timestamp now = new Timestamp(System.currentTimeMillis());
             Produit p =produitRepository.save(new Produit(enchere.getIdutilisateur(),enchere.getNomproduit(),enchere.getDescription(),enchere.getPhoto(),enchere.getIdcategorieproduit())) ;
             System.out.println("p saved");
-            Enchere e = enchereRepository.save(new Enchere(p.getId(),p.getIdutilisateur(),enchere.getDescription(),enchere.getPrixminimumvente(),now, enchere.getDuree()));
+            Enchere e = enchereRepository.save(new Enchere(p.getId(),p.getIdutilisateur(),enchere.getDescriptionenchere(),enchere.getPrixminimumvente(),now, enchere.getDuree()));
             System.out.println("coucou");
             DetailEnchere detail = detailEnchereRepository.findById(e.getId()).orElseThrow(() -> new Exception("Enchere not found"));
             System.out.println("retour");

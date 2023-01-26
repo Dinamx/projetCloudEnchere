@@ -7,7 +7,6 @@ import javax.persistence.Id;
 public class Photo {
     @Id
     private String id;
-
     private int idproduit;
     private String photo;
 
