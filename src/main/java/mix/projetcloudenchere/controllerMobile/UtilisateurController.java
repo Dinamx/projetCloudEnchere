@@ -30,12 +30,10 @@ public class UtilisateurController {
 
 //    Format Json Inscription
 //        {
-//        "id": 1,
 //        "nom": "John",
 //        "prenom": "Wick",
 //        "email": "user1@example.com",
 //        "mdp": "user1",
-//        "dateinscription": "2023-01-16"
 //    }
 
 //    Inscription

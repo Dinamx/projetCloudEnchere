@@ -50,7 +50,7 @@
                     <footer class="footer mt-3">
                         <div class="container-fluid">
                             <div class="footer-content text-center small">
-                                <span class="text-muted">Dina ft Eloic , projet 2023</span>
+                                <span class="text-muted">&copy; 2023 Projet Cloud Enchere</span>
                             </div>
                         </div>
                     </footer>
