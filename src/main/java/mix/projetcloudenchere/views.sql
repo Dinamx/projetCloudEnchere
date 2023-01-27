@@ -90,6 +90,17 @@ u.idutilisateur
 from utilisateur u;
 
 -- Vue pour le trigger des notifications.
-select * from detail_enchere;
+-- select * from detail_enchere;
 
-select * from detail_enchere where idenchere not in (select idenchere from notification);
+-- select * from detail_enchere where idenchere not in (select idenchere from notification);
+
+
+-- Compte actuel d'un client
+
+-- Total
+select idutilisateur,sum(montant) from rechargementcompte where idutilisateur = 1 and validation = 1 group by idutilisateur;
+
+-- Total lany
+
+
+-- Montant bloqués
