@@ -2,6 +2,7 @@ package mix.projetcloudenchere.controllerMobile;
 
 import mix.projetcloudenchere.model.Enchere;
 import mix.projetcloudenchere.model.Notification;
+import mix.projetcloudenchere.model.Rechargementcompte;
 import mix.projetcloudenchere.repository.EnchereRepository;
 import mix.projetcloudenchere.repository.NotificationRepository;
 import mix.projetcloudenchere.views.DetailEnchere;
@@ -11,6 +12,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.sql.Timestamp;
 import java.util.List;
 
 @RestController
@@ -33,6 +35,21 @@ public class NotificationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @PostMapping("")
+    public ResponseEntity<?> rechargerMonCompte(
+            @RequestParam(required = true, value="idnotification") int idnotification) {
+        try {
+             notificationRepository.updateRechargement(idnotification);
+            System.out.println("--------------- notification lue ---------------");
+            return new ResponseEntity<>(HttpStatus.OK);
+        } catch (Exception e) {
+            e.printStackTrace();
+            return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 //    @PostMapping("")
 //    public ResponseEntity<Notification> newNotif(
 //            @RequestParam(required = true, value="idUser") int IdUser,
@@ -45,17 +62,16 @@ public class NotificationController {
 //            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
 //        }
 //    }
-//    @GetMapping("")
-//    public ResponseEntity<List<Notification>> getAll(){
-//        try {
-//             List<Enchere> unchecked =
-//
-//
-//            return new ResponseEntity<>(notificationRepository.findAll() , HttpStatus.OK  );
-//        }
-//        catch (Exception e){
-//            e.printStackTrace();
-//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-//        }
-//    }
+    @GetMapping("")
+    public ResponseEntity<List<Notification>> getAll(){
+        try {
+
+
+            return new ResponseEntity<>(notificationRepository.findAll() , HttpStatus.OK  );
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 }

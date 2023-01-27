@@ -25,6 +25,10 @@ public class Notification {
     @Column(name = "lu")
     private Boolean lu;
 
+    public Notification() {
+
+    }
+
     public Boolean getLu() {
         return lu;
     }
