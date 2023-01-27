@@ -35,3 +35,6 @@ INSERT INTO Produit (idUtilisateur, nomProduit, description, photo, idCategorieP
 INSERT INTO Produit (idUtilisateur, nomProduit, description, photo, idCategorieProduit) VALUES (4, 'Roman de science-fiction', 'Roman de science-fiction captivant avec une histoire intrigante', '', 4);
 INSERT INTO Produit (idUtilisateur, nomProduit, description, photo, idCategorieProduit) VALUES (5, 'Canapé en cuir', 'Canapé en cuir confortable et élégant', '', 5);
 
+
+
+insert into notification values (default , 1, 1 , default , false);

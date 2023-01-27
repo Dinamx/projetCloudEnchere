@@ -88,3 +88,6 @@ coalesce((select sum(montant) from rechargementcompte where idutilisateur=u.idut
 as solde_actuelle,
 u.idutilisateur 
 from utilisateur u;
+
+-- Vue pour le trigger des notifications.
+

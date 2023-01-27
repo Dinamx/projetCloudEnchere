@@ -51,7 +51,7 @@ public class RechercheController {
 //        return encheres;
 //
 //    }
-    @PostMapping("/searches")
+    @PostMapping("/searchesx")
     public static List<VueEnchereProduitUtilisateur> advancedSearches(@RequestParam(required = false, value="dateheureenchere") String dateheureenchere,
                                         @RequestParam(required = false, value="idcategorie") int  idcategorie,
                                         @RequestParam(required = false, value="status") int status,
@@ -64,15 +64,9 @@ public class RechercheController {
             encheres = ed.getListEnchereRecherche(stmt);
 //                con1.getConnection().close();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return encheres;
 
-    }
-
-    public static void main(String[] args){
-        List<VueEnchereProduitUtilisateur> advancedSearch=advancedSearches("",0,0,0,"");
-        for(int i=0;i<advancedSearch.size();i++){
-            System.out.println(advancedSearch.get(i).getNomproduit());
-        }
     }
 }

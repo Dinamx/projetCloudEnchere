@@ -16,6 +16,18 @@ public class Rechargementcompte {
     @Column(name = "idutilisateur", nullable = false)
     private Integer idutilisateur;
 
+    public Rechargementcompte(Integer idutilisateur, Double montant, Timestamp dateheurechargement, Integer validation) {
+        this.idutilisateur = idutilisateur;
+        this.montant = montant;
+        this.dateheurechargement = dateheurechargement;
+        this.validation = validation;
+    }
+
+    public Rechargementcompte(Integer idutilisateur, Double montant) {
+        this.idutilisateur = idutilisateur;
+        this.montant = montant;
+    }
+
     @Column(name = "montant", nullable = false)
     private Double montant;
 
@@ -24,6 +36,10 @@ public class Rechargementcompte {
 
     @Column(name = "validation")
     private Integer validation;
+
+    public Rechargementcompte() {
+
+    }
 
     public Integer getValidation() {
         return validation;
@@ -40,6 +56,8 @@ public class Rechargementcompte {
     public void setDateheurechargement(Timestamp dateheurechargement) {
         this.dateheurechargement = dateheurechargement;
     }
+
+
 
     public Double getMontant() {
         return montant;

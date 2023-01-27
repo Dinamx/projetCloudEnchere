@@ -6,7 +6,6 @@ import mix.projetcloudenchere.repository.EnchereRepository;
 import mix.projetcloudenchere.repository.ProduitRepository;
 import mix.projetcloudenchere.repository.VueEnchereProduitUtilisateurRepository;
 import mix.projetcloudenchere.views.DetailEnchere;
-import mix.projetcloudenchere.views.VueEnchereProduitUtilisateur;
 import mix.projetcloudenchere.viewsRepository.DetailEnchereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -140,6 +139,8 @@ public class EnchereController {
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+
 
 
 }

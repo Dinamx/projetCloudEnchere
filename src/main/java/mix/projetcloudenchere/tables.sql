@@ -112,6 +112,7 @@ create table Enchere(
                         prixMinimumVente double precision,
                         dureeEnchere int,
                         DateHeureEnchere TIMESTAMP default CURRENT_TIMESTAMP,
+
                         status int default 0
 );
 
@@ -145,12 +146,6 @@ Create table PrelevementEnchere(
 );
 
 -- 14
-Create table Notitfication(
-    idNotification serial not null primary key,
-    idEnchere int not null references Enchere(idEnchere),
-    idUtilisateur int not null references Utilisateur(idUtilisateur),
-    datenotif timestamp default CURRENT_TIMESTAMP
-);
 
 
 create sequence pourcentageprelevee_id_seq
@@ -178,3 +173,22 @@ select u.idutilisateur,((select sum(montant) from rechargementcompte where idUti
 -- Statistics
 -- les tops 3 des categories qui rapport le plus par mois
 select c.categorie,(select max(montant_offre) from surenchere group by extract(month from DateHeureMise)) as moyenne,to_char(DateHeureEnchere,'Month') as mois from produit p join CategorieProduit c using(idCategorieProduit) join Enchere e using(idProduit) join surenchere s using(idEnchere) group by c.idCategorieProduit,mois order by moyenne desc limit 3;
+
+
+-- Partie 2 a faire
+
+Create table Notification(
+                              idNotification serial not null primary key,
+                              idEnchere int not null references Enchere(idEnchere),
+                              idUtilisateur int not null references Utilisateur(idUtilisateur),
+                              datenotif timestamp default CURRENT_TIMESTAMP,
+                              lu boolean default false
+);
+
+
+
+
+
+
+
+
