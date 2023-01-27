@@ -4,6 +4,8 @@ import mix.projetcloudenchere.model.Enchere;
 import mix.projetcloudenchere.model.Notification;
 import mix.projetcloudenchere.repository.EnchereRepository;
 import mix.projetcloudenchere.repository.NotificationRepository;
+import mix.projetcloudenchere.views.DetailEnchere;
+import mix.projetcloudenchere.viewsRepository.DetailEnchereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -13,13 +15,13 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
-@RequestMapping("/ckeckNotif")
+@RequestMapping("/notifications")
 public class NotificationController {
     @Autowired
     NotificationRepository notificationRepository;
 
     @Autowired
-    EnchereRepository enchereRepository;
+    DetailEnchereRepository detailEnchereRepository;
 
     @GetMapping("/{iduser}")
     public ResponseEntity<List<Notification>> checkNotif(@PathVariable int iduser){
@@ -31,18 +33,29 @@ public class NotificationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
-
-    @GetMapping("")
-    public ResponseEntity<List<Notification>> getAll(){
-        try {
-            List<Enchere> unchecked =
-
-
-            return new ResponseEntity<>(notificationRepository.findAll() , HttpStatus.OK  );
-        }
-        catch (Exception e){
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-    }
+//    @PostMapping("")
+//    public ResponseEntity<Notification> newNotif(
+//            @RequestParam(required = true, value="idUser") int IdUser,
+//            @RequestParam(required = true, value="montant") int idEnchere){
+//        try {
+//
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
+//    @GetMapping("")
+//    public ResponseEntity<List<Notification>> getAll(){
+//        try {
+//             List<Enchere> unchecked =
+//
+//
+//            return new ResponseEntity<>(notificationRepository.findAll() , HttpStatus.OK  );
+//        }
+//        catch (Exception e){
+//            e.printStackTrace();
+//            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+//        }
+//    }
 }

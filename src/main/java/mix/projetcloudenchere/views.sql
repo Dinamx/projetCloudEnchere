@@ -90,4 +90,6 @@ u.idutilisateur
 from utilisateur u;
 
 -- Vue pour le trigger des notifications.
+select * from detail_enchere;
 
+select * from detail_enchere where idenchere not in (select idenchere from notification);

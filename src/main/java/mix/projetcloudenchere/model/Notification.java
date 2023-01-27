@@ -64,4 +64,19 @@ public class Notification {
     public void setId(Integer id) {
         this.id = id;
     }
+
+    public Notification(int idenchere, int idutilisateur) {
+        Enchere e = new Enchere();
+        e.setId(idenchere);
+
+        Utilisateur utilisateur = new Utilisateur();
+        utilisateur.setId(idutilisateur);
+
+        Timestamp now  = new Timestamp(System.currentTimeMillis());
+
+        this.idenchere = e;
+        this.idutilisateur = utilisateur;
+        this.datenotif = now;
+        this.lu = false;
+    }
 }
