@@ -21,6 +21,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/users")
 public class UtilisateurController {
     @Autowired
     UtilisateurRepository utilisateurRepository;
@@ -28,17 +29,11 @@ public class UtilisateurController {
     @Autowired
     TokenuserRepository tokenuserRepository;
 
-//    Format Json Inscription
-//        {
-//        "nom": "John",
-//        "prenom": "Wick",
-//        "email": "user1@example.com",
-//        "mdp": "user1",
-//    }
+
 
 //    Inscription
-@PostMapping("/users")
-public ResponseEntity<Utilisateur> surencherir(@RequestBody Utilisateur tosave) {
+@PostMapping("/signup")
+public ResponseEntity<Utilisateur> connexion(@RequestBody Utilisateur tosave) {
     try {
         Timestamp now = new Timestamp(System.currentTimeMillis());
         Utilisateur user = utilisateurRepository.save(new Utilisateur(tosave.getNom(),tosave.getPrenom(),tosave.getEmail(),tosave.getMdp(), LocalDate.now())) ;
@@ -49,7 +44,7 @@ public ResponseEntity<Utilisateur> surencherir(@RequestBody Utilisateur tosave) 
 }
 
 
-    @PostMapping("/users/signup")
+    @PostMapping("/signin")
     public ResponseEntity<Tokenuser> login(@RequestBody Utilisateur utilisateur) throws Exception {
         System.out.println("log");
 //        {

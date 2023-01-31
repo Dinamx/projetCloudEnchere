@@ -98,9 +98,22 @@ from utilisateur u;
 -- Compte actuel d'un client
 
 -- Total
+create or replace  view deposit as
 select idutilisateur,sum(montant) from rechargementcompte where idutilisateur = 1 and validation = 1 group by idutilisateur;
 
--- Total lany
+-- Maximum de chaque enchere
+create or replace view max_auction as
+select max(montant_offre) as gagnant,idenchere,idutilisateur from surenchere group by idenchere,idutilisateur;
 
+create or replace view winnedAuction as
+    select sum(gagnant) as depense, idutilisateur from max_auction group by idutilisateur;
 
--- Montant bloqués
+select * from winnedAuction;
+
+drop view compteActuel;
+create or replace view compteActuel as
+select ROW_NUMBER() OVER (ORDER BY d.idutilisateur) as fakeid
+     , d.idutilisateur ,(d.sum - depense )as compte   from deposit d join winnedAuction w on d.idutilisateur= w.idutilisateur ;
+
+select * from compteActuel;
+
