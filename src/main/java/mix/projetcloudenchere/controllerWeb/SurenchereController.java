@@ -64,5 +64,22 @@ public class SurenchereController {
     }
     }
 
+    @GetMapping("/surenchere/{idEnchere}")
+    public ResponseEntity<List<Surenchere>> listeSurenchereparEnchere(@PathVariable("idEnchere") int idEnchere) {
+        try {
+        List<Surenchere> surenchere = new ArrayList<>();
+        surenchereRepository.findAllByIdenchereOrderByDateheuremiseDesc(idEnchere).forEach(surenchere::add);
+        if (surenchere.isEmpty()) {
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+        }
+        return new ResponseEntity<>(surenchere, HttpStatus.OK);
+        }
+        catch(Exception e)
+        {
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+    }
+    }
+
 }
 

@@ -120,12 +120,14 @@ public class EnchereController {
 //            "nomproduit": "Courroie",
 //            "dateheureenchere": "2023-01-18T17:20:05.882+00:00"
 //    }
+
     @Transactional
     @PostMapping("/encheres")
     public ResponseEntity<DetailEnchere> ajoutEnchere(@RequestBody DetailEnchere enchere){
         try {
             System.out.println("ok");
             Timestamp now = new Timestamp(System.currentTimeMillis());
+
             Produit p =produitRepository.save(new Produit(enchere.getIdutilisateur(),enchere.getNomproduit(),enchere.getDescription(),enchere.getPhoto(),enchere.getIdcategorieproduit())) ;
             System.out.println("p saved");
             Enchere e = enchereRepository.save(new Enchere(p.getId(),p.getIdutilisateur(),enchere.getDescriptionenchere(),enchere.getPrixminimumvente(),now, enchere.getDuree()));

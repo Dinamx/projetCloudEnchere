@@ -20,12 +20,13 @@ public class CompteClientController {
     RechargementcompteRepository rechargementcompteRepository;
 
     @PostMapping("")
-    public ResponseEntity<Rechargementcompte> rechargerMonCompte(
-        @RequestParam(required = true, value="idUser") int IdUser,
-        @RequestParam(required = true, value="montant") double montant) {
+    public ResponseEntity<Rechargementcompte> rechargerMonCompte(@RequestBody Rechargementcompte rechargementcomptes){
+//        @RequestParam(required = true, value="idUser") String IdUser,
+//        @RequestParam(required = true, value="montant") String montant) {
     try {
+
         Timestamp now = new Timestamp(System.currentTimeMillis());
-        Rechargementcompte rechargementcompte = new Rechargementcompte(IdUser, montant , now , 0);
+        Rechargementcompte rechargementcompte = new Rechargementcompte(rechargementcomptes.getIdutilisateur(), rechargementcomptes.getMontant() , now , 0);
         rechargementcompteRepository.save(rechargementcompte);
         System.out.println("--------------- Account recharge done ---------------");
         return new ResponseEntity<>(HttpStatus.OK);

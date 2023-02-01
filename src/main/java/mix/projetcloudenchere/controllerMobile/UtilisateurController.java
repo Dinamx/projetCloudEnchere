@@ -43,14 +43,14 @@ public ResponseEntity<Utilisateur> connexion(@RequestBody Utilisateur tosave) {
     }
 }
 
-
-    @PostMapping("/signin")
+@PostMapping("/signin")
     public ResponseEntity<Tokenuser> login(@RequestBody Utilisateur utilisateur) throws Exception {
-        System.out.println("log");
+        System.out.println("signin" + utilisateur.getEmail() + utilisateur.getMdp());
 //        {
 //        "email": "user1@example.com",
 //        "mdp": "user1"
 //    }
+
         if( utilisateurRepository.findByEmailAndMdp(utilisateur.getEmail(),utilisateur.getMdp()) != null) {
             Utilisateur user = utilisateurRepository.findByEmailAndMdp(utilisateur.getEmail(),utilisateur.getMdp());
             System.out.println();
