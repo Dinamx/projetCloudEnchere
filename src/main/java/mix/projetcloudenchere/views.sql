@@ -117,3 +117,5 @@ select ROW_NUMBER() OVER (ORDER BY d.idutilisateur) as fakeid
 
 select * from compteActuel;
 
+
+

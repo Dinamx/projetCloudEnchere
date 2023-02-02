@@ -21,4 +21,10 @@ public interface NotificationRepository extends JpaRepository<Notification, Inte
     @Query(value = "UPDATE public.notification SET lu = true WHERE idnotification = :idnotification",nativeQuery = true)
     public void updateRechargement(@Param("idnotification")int idnotification);
 
+    @Modifying(clearAutomatically = true)
+    @Transactional
+    @Query(value = "UPDATE public.notification SET lu = true WHERE idnotification = :idnotification",nativeQuery = true)
+    public void updateNotif(@Param("idnotification")int idnotification);
+
+
 }

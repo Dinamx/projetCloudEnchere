@@ -74,4 +74,20 @@ public class NotificationController {
             return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+
+    @GetMapping("/update/{idnotif}")
+    public ResponseEntity<?> updateEtat(@PathVariable int idnotif){
+        try {
+
+            notificationRepository.updateNotif(idnotif);
+            System.out.println("notifs updated");
+            return new ResponseEntity<>( HttpStatus.OK  );
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+
 }

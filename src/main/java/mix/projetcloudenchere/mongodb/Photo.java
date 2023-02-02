@@ -10,6 +10,10 @@ public class Photo {
     private int idproduit;
     private String photo;
 
+    public Photo(int idproduit, String photo) {
+        this.idproduit = idproduit;
+        this.photo = photo;
+    }
 
     public String getId() {
         return id;
