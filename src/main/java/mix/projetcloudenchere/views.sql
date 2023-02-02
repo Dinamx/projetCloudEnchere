@@ -131,6 +131,9 @@ select * from rechargementcompte where validation =1;
 create or replace view surenchere_bloque as
 select * from surenchere where etat = 1 ;
 
+select max(montant_offre) as montant_offre , idenchere , idutilisateur from surenchere where etat = 1 group by idenchere, idutilisateur;
+
+select * from surenchere;
 
 create or replace view surenchere_final as
     select * from test;

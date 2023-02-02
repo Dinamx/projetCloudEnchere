@@ -37,6 +37,7 @@ create table Admin(
 );
 INSERT INTO Admin (email, mdp) VALUES ('admin@gmail.com', 'adminpassword');
 
+
 -- 3
 create table tokenAdmin(
                            idtokenadmin serial primary key ,
