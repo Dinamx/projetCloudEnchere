@@ -61,7 +61,6 @@ public class TriggerController {
                     List<Surenchere> listeEnchere = surenchereRepository.findAllByIdenchereOrderByDateheuremiseDesc(idenchere);
                     for (Surenchere e : listeEnchere){
                         System.out.println("--------Liste des enchere-----------" + e.getId());
-
                     }
 
 
