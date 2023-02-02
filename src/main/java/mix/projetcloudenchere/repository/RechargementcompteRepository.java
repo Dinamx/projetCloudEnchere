@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 public interface RechargementcompteRepository extends JpaRepository<Rechargementcompte, Integer> {
 
-//    TODO TEST
     @Transactional
     @Modifying
     @Query(value = "UPDATE public.rechargementcompte SET validation = 1 WHERE idrechargementcompte =:idRechargement",nativeQuery = true)

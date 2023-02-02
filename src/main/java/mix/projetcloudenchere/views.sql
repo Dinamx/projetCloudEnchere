@@ -81,6 +81,8 @@ Create or replace view client_actif as
 select u.idutilisateur,coalesce((select count(*) from enchere where idutilisateur=u.idutilisateur),0) as nombre_enchere,coalesce((select count(*) from surenchere  where idutilisateur=u.idutilisateur),0)as nombre_mise,coalesce((select max(montant_offre) from surenchere where idutilisateur=u.idutilisateur),0) as mise_lapluselevee,(select concat(u.nom ,' '||u.prenom) from utilisateur where idutilisateur=u.idutilisateur) as nom_prenom from utilisateur u order by nombre_enchere,nombre_mise,mise_lapluselevee desc limit 3;
 
 
+
+-- Tsy afera
 -- 5 solde d'un client (Gain en rechargement -depense en encheres)
 Create or replace view solde_utilisateur as
 select  
@@ -117,5 +119,84 @@ select ROW_NUMBER() OVER (ORDER BY d.idutilisateur) as fakeid
 
 select * from compteActuel;
 
+-- Tsy afera
+
+
+-- Vue pour le solde de l'user
+-- vue pour la Somme de tout les rechargement validés.
+create or replace view rechargement_valide as
+select * from rechargementcompte where validation =1;
+
+-- vue pour la somme de tout les surenchères bloqués
+create or replace view surenchere_bloque as
+select * from surenchere where etat = 1 ;
+
+
+create or replace view surenchere_final as
+    select * from test;
+
+select * from surenchere_bloque;
+
+select * from rechargement_valide;
+
+create or replace view temp2 as
+select  sum(montant) as somme , idutilisateur from rechargement_valide group by idutilisateur;
+
+create or replace view temp1 as
+select sum(montant_offre) as montant_offre , idutilisateur from surenchere_bloque group by  idutilisateur;
+
+
+select * from temp1;
+select * from temp2;
+
+-- TODO fonctionnel
+select  t.idutilisateur , coalesce(montant_offre , 0) + coalesce(somme ,0) as valeur   from temp1 t1 full join temp2 t on t1.idutilisateur = t.idutilisateur ;
+
+
+
+
+-- to check all winning surenchere
+--
+select * from surenchere where etat=2;
+
+select * from pourcentageprelevee;
+
+
+
+
+
+
+
+CREATE VIEW montant_deduit AS
+SELECT surenchere.idsurenchere, surenchere.idenchere, surenchere.idutilisateur,
+       surenchere.montant_offre - (surenchere.montant_offre * (SELECT MAX(pourcentageprelevee.pourcentage)
+ FROM pourcentageprelevee
+WHERE pourcentageprelevee.date <= surenchere.dateheuremise) / 100) AS montant_deduit,
+       surenchere.dateheuremise, surenchere.etat
+FROM surenchere
+WHERE surenchere.etat = 2;
+
+
+create or replace view MontantDejaPreleve as
+select idutilisateur , sum(montant_deduit) as montant_deduit  from montant_deduit group by idutilisateur;
+
+
+create or replace view totalRechargementMontantBloque as
+select sb.idutilisateur,sum( coalesce(s.montant_offre , 0) + coalesce(sb.montant , 0) )  as soldesansValidation from surenchere_bloque s full join rechargement_valide sb on sb.idutilisateur = s.idutilisateur group by sb.idutilisateur;
+
+
+-- Temp
+create or replace view soldeClient1 as
+select tr.idutilisateur, sum (coalesce(soldesansValidation,0) + coalesce(montant_deduit ,0))  as somme from totalRechargementMontantBloque tr full join montantdejapreleve m on tr.idutilisateur = m.idutilisateur group by tr.idutilisateur;
+
+
+-- VUE FINALE DE LA SOLDE DU CLIENT
+-- La difference avec temp est que , sur la premiere , certains utilisateurs n'ont pas d'argent
+create or replace view soldeclient as
+select utilisateur.idutilisateur , coalesce(somme  , 0 ) as solde from utilisateur full join soldeClient1 s on utilisateur.idutilisateur = s.idutilisateur;
+
+
+
+-- vue pour toute les surencheres ou l'etat est egal a false
 
 

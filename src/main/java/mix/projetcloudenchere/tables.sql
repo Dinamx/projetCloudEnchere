@@ -126,6 +126,12 @@ create table surenchere(
                                 montant_offre float,
                                 DateHeureMise TIMESTAMP default CURRENT_TIMESTAMP
 );
+
+-- true pour prendre en compte , false pour ne pas prendre en compte
+alter table surenchere
+    add etat integer default 1;
+
+
 INSERT INTO surenchere(idEnchere,idUtilisateur,montant_offre) values(1,1,80000);
 INSERT INTO surenchere(idEnchere,idUtilisateur,montant_offre) values(1,1,90000);
 INSERT INTO surenchere(idEnchere,idUtilisateur,montant_offre) values(1,1,100000);

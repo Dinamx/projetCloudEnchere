@@ -2,8 +2,12 @@ package mix.projetcloudenchere.controllerMobile;
 
 
 import mix.projetcloudenchere.dao.DateDao;
+import mix.projetcloudenchere.model.Enchere;
 import mix.projetcloudenchere.model.Notification;
+import mix.projetcloudenchere.model.Surenchere;
+import mix.projetcloudenchere.repository.EnchereRepository;
 import mix.projetcloudenchere.repository.NotificationRepository;
+import mix.projetcloudenchere.repository.SurenchereRepository;
 import mix.projetcloudenchere.views.DetailEnchere;
 import mix.projetcloudenchere.viewsRepository.DetailEnchereRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +20,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -28,6 +33,12 @@ public class TriggerController {
 
     @Autowired
     NotificationRepository notificationRepository;
+
+
+    @Autowired
+    SurenchereRepository surenchereRepository;
+
+
 
     @GetMapping("/notifs")
     public ResponseEntity<?> checkNotif(){
@@ -45,6 +56,19 @@ public class TriggerController {
                     Notification notif = new Notification(d.getIdenchere(), d.getIdutilisateur());
                     notificationRepository.save(notif);
                     System.out.println("------------new Notification inserted ----------------");
+//                    Checkena kely aloha ny tena hoe ahoana ny ahoana amle hoe
+                    int idenchere = d.getIdenchere();
+                    List<Surenchere> listeEnchere = surenchereRepository.findAllByIdenchereOrderByDateheuremiseDesc(idenchere);
+                    for (Surenchere e : listeEnchere){
+                        System.out.println("--------Liste des enchere-----------" + e.getId());
+
+                    }
+
+
+
+
+
+
                 }
                 else {
                     System.out.println("else condition");

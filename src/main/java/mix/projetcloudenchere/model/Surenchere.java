@@ -25,6 +25,17 @@ public class Surenchere {
     @Column(name = "dateheuremise")
     private Timestamp dateheuremise;
 
+    @Column(name = "etat")
+    private Integer etat = 1;
+
+    public Integer getEtat() {
+        return etat;
+    }
+
+    public void setEtat(Integer etat) {
+        this.etat = etat;
+    }
+
     public Surenchere() {
 
     }

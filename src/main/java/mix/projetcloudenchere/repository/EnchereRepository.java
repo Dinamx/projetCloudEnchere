@@ -7,4 +7,6 @@ import java.util.List;
 
 public interface EnchereRepository extends JpaRepository<Enchere, Integer> {
     List<Enchere> findAllByIdutilisateur(String idUser);
+
+
 }

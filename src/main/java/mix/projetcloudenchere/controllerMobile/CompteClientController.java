@@ -2,6 +2,8 @@ package mix.projetcloudenchere.controllerMobile;
 
 import mix.projetcloudenchere.model.Rechargementcompte;
 import mix.projetcloudenchere.repository.RechargementcompteRepository;
+import mix.projetcloudenchere.views.Soldeclient;
+import mix.projetcloudenchere.viewsRepository.SoldeclientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -18,6 +20,8 @@ public class CompteClientController {
 
     @Autowired
     RechargementcompteRepository rechargementcompteRepository;
+    @Autowired
+    SoldeclientRepository soldeclientRepository;
 
     @PostMapping("")
     public ResponseEntity<Rechargementcompte> rechargerMonCompte(@RequestBody Rechargementcompte rechargementcomptes){
@@ -36,4 +40,14 @@ public class CompteClientController {
     }
 }
 
+@GetMapping("/{iduser}")
+public ResponseEntity<Soldeclient> getSoldeClient(@PathVariable("iduser") int iduser){
+        try{
+            return new ResponseEntity<>(soldeclientRepository.findByIdutilisateur(iduser), HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+}
 }
