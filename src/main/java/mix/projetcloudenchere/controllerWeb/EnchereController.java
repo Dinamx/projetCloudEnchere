@@ -158,7 +158,23 @@ public class EnchereController {
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    //Fiche encheres
+    @GetMapping("/fichesenchere/{idenchere}")
+    public ResponseEntity<DetailEnchere> getEnchereById(@PathVariable String idenchere){
+        try {
+            System.out.println("idenchere" + idenchere);
 
+            DetailEnchere detailEnchere=detailEnchereRepository.getReferenceById(Integer.valueOf(idenchere));
+            if (detailEnchere==null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            System.out.println("retour");
+            return new ResponseEntity<>(detailEnchere, HttpStatus.OK);
+        }
+        catch (Exception e){
+            return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
 
 
