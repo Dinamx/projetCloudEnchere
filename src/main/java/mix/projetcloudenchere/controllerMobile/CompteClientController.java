@@ -4,6 +4,7 @@ import mix.projetcloudenchere.model.Rechargementcompte;
 import mix.projetcloudenchere.repository.RechargementcompteRepository;
 import mix.projetcloudenchere.views.Soldeclient;
 import mix.projetcloudenchere.viewsRepository.SoldeclientRepository;
+import mix.projetcloudenchere.viewsRepository.SoldeuserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,7 +22,7 @@ public class CompteClientController {
     @Autowired
     RechargementcompteRepository rechargementcompteRepository;
     @Autowired
-    SoldeclientRepository soldeclientRepository;
+    SoldeuserRepository soldeuserRepository;
 
     @PostMapping("")
     public ResponseEntity<Rechargementcompte> rechargerMonCompte(@RequestBody Rechargementcompte rechargementcomptes){
@@ -42,7 +43,7 @@ public class CompteClientController {
 @GetMapping("/{iduser}")
 public ResponseEntity<Soldeclient> getSoldeClient(@PathVariable("iduser") int iduser){
         try{
-            return new ResponseEntity<>(soldeclientRepository.findByIdutilisateur(iduser), HttpStatus.OK);
+            return new ResponseEntity<>(soldeuserRepository.findByIdutilisateur(iduser), HttpStatus.OK);
         }
         catch (Exception e){
             e.printStackTrace();

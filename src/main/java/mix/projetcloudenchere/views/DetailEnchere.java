@@ -44,6 +44,7 @@ public class DetailEnchere {
     @Type(type = "org.hibernate.type.TextType")
     private String description;
 
+
     @Column(name = "idcategorieproduit")
     private Integer idcategorieproduit;
 

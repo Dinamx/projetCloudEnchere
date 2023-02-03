@@ -128,29 +128,32 @@ create or replace view rechargement_valide as
 select * from rechargementcompte where validation =1;
 
 -- vue pour la somme de tout les surenchères bloqués
+-- create or replace view surenchere_bloque as
+-- select * from surenchere where etat = 1 ;
+
+
+
+drop view surenchere_bloque cascade ;
 create or replace view surenchere_bloque as
-select * from surenchere where etat = 1 ;
+with maxoffre
+         as(select (select max(montant_offre) from surenchere where idenchere=su.idenchere) maxoffre,su.idutilisateur,su.idenchere from surenchere su where etat=1 group by su.idenchere,su.idutilisateur)
+select sum(mx.maxoffre) as montant_offre,mx.idutilisateur from maxoffre mx group by mx.idutilisateur;
+
+
+select *  from surenchere;
 
 select max(montant_offre) as montant_offre , idenchere , idutilisateur from surenchere where etat = 1 group by idenchere, idutilisateur;
 
 select * from surenchere;
 
-create or replace view surenchere_final as
-    select * from test;
+-- create or replace view surenchere_final as
+--     select * from test;
 
 select * from surenchere_bloque;
 
 select * from rechargement_valide;
 
-create or replace view temp2 as
-select  sum(montant) as somme , idutilisateur from rechargement_valide group by idutilisateur;
 
-create or replace view temp1 as
-select sum(montant_offre) as montant_offre , idutilisateur from surenchere_bloque group by  idutilisateur;
-
-
-select * from temp1;
-select * from temp2;
 
 -- TODO fonctionnel
 select  t.idutilisateur , coalesce(montant_offre , 0) + coalesce(somme ,0) as valeur   from temp1 t1 full join temp2 t on t1.idutilisateur = t.idutilisateur ;
@@ -184,22 +187,43 @@ create or replace view MontantDejaPreleve as
 select idutilisateur , sum(montant_deduit) as montant_deduit  from montant_deduit group by idutilisateur;
 
 
-create or replace view totalRechargementMontantBloque as
-select sb.idutilisateur,sum( coalesce(s.montant_offre , 0) + coalesce(sb.montant , 0) )  as soldesansValidation from surenchere_bloque s full join rechargement_valide sb on sb.idutilisateur = s.idutilisateur group by sb.idutilisateur;
+-- create or replace view totalRechargementMontantBloque as
+-- select sb.idutilisateur,sum( coalesce(s.montant_offre , 0) + coalesce(sb.montant , 0) )  as soldesansValidation from surenchere_bloque s full join rechargement_valide sb on sb.idutilisateur = s.idutilisateur group by sb.idutilisateur;
 
 
 -- Temp
-create or replace view soldeClient1 as
-select tr.idutilisateur, sum (coalesce(soldesansValidation,0) + coalesce(montant_deduit ,0))  as somme from totalRechargementMontantBloque tr full join montantdejapreleve m on tr.idutilisateur = m.idutilisateur group by tr.idutilisateur;
+-- create or replace view soldeClient1 as
+-- select tr.idutilisateur, sum (coalesce(soldesansValidation,0) + coalesce(montant_deduit ,0))  as somme from totalRechargementMontantBloque tr full join montantdejapreleve m on tr.idutilisateur = m.idutilisateur group by tr.idutilisateur;
 
 
 -- VUE FINALE DE LA SOLDE DU CLIENT
 -- La difference avec temp est que , sur la premiere , certains utilisateurs n'ont pas d'argent
-create or replace view soldeclient as
-select utilisateur.idutilisateur , coalesce(somme  , 0 ) as solde from utilisateur full join soldeClient1 s on utilisateur.idutilisateur = s.idutilisateur;
+-- create or replace view soldeclient as
+-- select utilisateur.idutilisateur , coalesce(somme  , 0 ) as solde from utilisateur full join soldeClient1 s on utilisateur.idutilisateur = s.idutilisateur;
 
 
+-- Solde du client est egal a : Rechargement validé - (surenchere bloqué) - surenchere gagné deja prelevé
+-- rechargement valide
+select montant,idutilisateur from rechargement_valide;
+-- Surenchère bloqués
+select montant_offre,idutilisateur from surenchere_bloque;
+-- Surenchere gagné deja prelevé
+select montant_deduit, idutilisateur from montant_deduit;
 
--- vue pour toute les surencheres ou l'etat est egal a false
+drop view temp1;
+create or replace view temp1 as
+select sum (coalesce(rv.montant) - coalesce(sb.montant_offre , 0)) as solde   , rv.idutilisateur from rechargement_valide rv full join surenchere_bloque sb on rv.idutilisateur = sb.idutilisateur
+group by rv.idutilisateur;
+
+drop view soldeUser1;
+create or replace  view soldeUser1 as
+
+select sum (coalesce(solde,0) - coalesce(montant_deduit,0)) as solde , t1.idutilisateur from temp1 t1 full join montant_deduit md on t1.idutilisateur = md.idutilisateur
+group by t1.idutilisateur;
+
+drop view soldeUser;
+create or replace view soldeUser as
+select coalesce(solde , 0 ) as solde , u.idutilisateur from soldeUser1 full join utilisateur u on soldeUser1.idutilisateur = u.idutilisateur;
+
 
 
