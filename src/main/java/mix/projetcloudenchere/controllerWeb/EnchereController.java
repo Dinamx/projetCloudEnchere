@@ -51,6 +51,23 @@ public class EnchereController {
             return  new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
         }
     }
+    @GetMapping("/encheres/details/{idenchere}")
+    public ResponseEntity<DetailEnchere> detailsEnchere(@PathVariable("idenchere") int idenchere){
+        try {
+            System.out.println("details");
+            List<DetailEnchere> enchere = new ArrayList<>();
+            DetailEnchere e = detailEnchereRepository.findByIdenchere(idenchere);
+            if (detailEnchereRepository.findByIdenchere(idenchere) == null) {
+                return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+            }
+            System.out.println("retour d'une enchere en particulier ");
+            return new ResponseEntity<>(e, HttpStatus.OK);
+        }
+        catch (Exception e){
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
 
     @GetMapping("/encheresList")
     public ResponseEntity<List<Enchere>> toutesEnchereDetails(){

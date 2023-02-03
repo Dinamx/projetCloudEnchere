@@ -1,6 +1,6 @@
 insert into categorieproduit (idcategorieproduit, categorie)
 values (default ,'Verrerie'),
- (default ,'Medieval'),
+ (default ,'Medieval'),0
  (default ,'Medecine');
 
 

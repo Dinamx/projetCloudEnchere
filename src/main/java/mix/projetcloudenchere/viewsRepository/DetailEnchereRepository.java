@@ -15,4 +15,7 @@ public interface DetailEnchereRepository extends JpaRepository<DetailEnchere, In
     @Query(value = "select * from detail_enchere where idenchere not in (select idenchere from notification) ",nativeQuery = true)
     public List<DetailEnchere> findAllUnchecked();
 
+    public DetailEnchere findByIdenchere(int idenchere);
+
+
 }
