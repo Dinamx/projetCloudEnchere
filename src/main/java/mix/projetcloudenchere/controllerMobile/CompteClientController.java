@@ -3,7 +3,7 @@ package mix.projetcloudenchere.controllerMobile;
 import mix.projetcloudenchere.model.Rechargementcompte;
 import mix.projetcloudenchere.repository.RechargementcompteRepository;
 import mix.projetcloudenchere.views.Soldeclient;
-import mix.projetcloudenchere.viewsRepository.SoldeclientRepository;
+import mix.projetcloudenchere.views.Soldeuser;
 import mix.projetcloudenchere.viewsRepository.SoldeuserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -41,7 +41,7 @@ public class CompteClientController {
 }
 
 @GetMapping("/{iduser}")
-public ResponseEntity<Soldeclient> getSoldeClient(@PathVariable("iduser") int iduser){
+public ResponseEntity<Soldeuser> getSoldeClient(@PathVariable("iduser") int iduser){
         try{
             return new ResponseEntity<>(soldeuserRepository.findByIdutilisateur(iduser), HttpStatus.OK);
         }
