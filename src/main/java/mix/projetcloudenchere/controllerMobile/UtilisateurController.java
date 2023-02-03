@@ -21,6 +21,7 @@ import java.util.List;
 
 @RestController
 @CrossOrigin
+@RequestMapping("/users")
 public class UtilisateurController {
     @Autowired
     UtilisateurRepository utilisateurRepository;
