@@ -60,14 +60,15 @@ public class TriggerController {
                     int idenchere = d.getIdenchere();
                     List<Surenchere> listeEnchere = surenchereRepository.findAllByIdenchereOrderByDateheuremiseDesc(idenchere);
                     for (Surenchere e : listeEnchere){
+//                        Settena 0 doly aloha amzay tsy rarahiana intsony
+                        e.setEtat(0);
+                        surenchereRepository.save(e);
                         System.out.println("--------Liste des enchere-----------" + e.getId());
                     }
-
-
-
-
-
-
+                    Surenchere e = listeEnchere.get(0);
+//                    Le enchere gagnante tamzay atao 2
+                    e.setEtat(2);
+                    surenchereRepository.save(e);
                 }
                 else {
                     System.out.println("else condition");
